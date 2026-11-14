@@ -851,6 +851,18 @@ main > .fin:last-child + * {margin-top:0}
 .ap-change + .stats-p{margin-top:8px}
 .btn .lg-mot{height:1.15em;vertical-align:-.3em;margin-left:-1px}
 
+/* l'équipe (note 23) : une carte entière de chaque côté, comme prévue pour une autre personne, en retrait ; jamais coupée */
+.ap-equipe{grid-template-columns:200px minmax(0,860px) 200px;justify-content:center;gap:22px;margin:0}
+.ap-place,.ap-place:first-child,.ap-place:last-child{height:auto;min-height:0;border-radius:var(--r-carte);padding:22px;opacity:.6;transform:scale(.92);background:#fff;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:12px;align-self:center}
+.ap-place .ap-silh{width:100%;height:auto;aspect-ratio:1;border-radius:16px;background:var(--gris)}
+.ap-place .ap-silh .ico{width:42%;height:42%;color:#D6D6DB}
+.ap-place i{height:12px;background:var(--gris)}
+.ap-place i:first-of-type{width:75%}
+.ap-place i + i{width:50%}
+.ap-place b{font-size:13px;font-weight:600;color:var(--doux)}
+@media (max-width:1240px){.ap-equipe{grid-template-columns:150px minmax(0,1fr) 150px;gap:14px}.ap-place{padding:16px}}
+@media (max-width:1000px){.ap-equipe{grid-template-columns:minmax(0,1fr)}.ap-place{display:none!important}}
+
 /* ------------------------------------------------------------------ L'assistant, en bas à droite (notes 20 et 21) */
 .as{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:12px;pointer-events:none}
 .as>*{pointer-events:auto}
@@ -929,6 +941,19 @@ main > .fin:last-child + * {margin-top:0}
 /* ------------------------------------------------------------------ le blog (outils/pages/blog.py) : l'index et les articles */
 .p-blog .haut .boutons:empty{display:none}
 .bl-article .prose{padding-bottom:clamp(8px,2vw,24px)}
+
+/* ------------------------------------------------------------------ Les grands écrans (note 23 : « en plein écran, tout s'éloigne »)
+   Les conteneurs arrondis (hauts de page, panneaux gris ou noirs, fin, pied) ne dépassent plus 1600 px de large et restent centrés :
+   sur un écran de 1920 ou 2560 px, MAX et les objets restent près du texte, et la page garde ses proportions.
+   En hauteur, les hauts de page ne s'étirent plus au-delà de 1000 px. */
+:root{--page-max:1600px}
+.haut,.ha,.panneau,.fin,.pied{max-width:calc(var(--page-max) - 2 * var(--marge))}
+@media (min-width:1616px){
+  .haut,.ha,.panneau,.fin,.pied{margin-left:auto;margin-right:auto}
+}
+.ha{min-height:min(calc(100svh - var(--marge)),1000px)}
+.hs-2 .haut:not(.petit){min-height:min(calc(100svh - var(--marge)),1000px)}
+.barre{width:min(1180px,calc(100% - 24px))}
 
 /* ------------------------------------------------------------------ Gains : /gains (classes ga-)
    Un peu de pêche, seulement pour les chiffres ; le reste en blanc, gris et noir. */
