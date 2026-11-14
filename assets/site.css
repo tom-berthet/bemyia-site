@@ -620,6 +620,63 @@ main > .fin:last-child + * {margin-top:0}
 /* les étoiles de Malt : toujours en jaune */
 .etoiles,.stat .etoiles,.lien .etoiles{color:#F5B301;letter-spacing:.04em}
 
+/* ------------------------------------------------------------------ 14/11 (note 21) : les hauts de page en version A
+   Toute la hauteur de l'écran, le titre au milieu, la couleur de la catégorie en haut qui descend vers le gris ;
+   l'accueil : du gris en haut vers le blanc. MAX dans son rôle à gauche, un objet plus grand à droite, posés en bas. */
+.haut{min-height:calc(100svh - var(--marge));display:flex;flex-direction:column}
+.haut.petit{min-height:0}
+.haut-in{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(120px,12vw,150px);padding-bottom:clamp(80px,9vw,120px)}
+.haut.petit .haut-in{flex:none}
+.haut-c .t1{margin-top:22px;font-size:clamp(40px,5.6vw,78px);line-height:1.01;letter-spacing:-.05em;max-width:13em}
+.haut.petit .haut-c .t1{font-size:clamp(34px,4.4vw,58px)}
+.haut-c .chapo{margin-top:22px;font-size:clamp(17px,1.5vw,20.5px);line-height:1.5;max-width:38em}
+.haut-c .boutons{margin-top:32px}
+.amb-ciel{background:linear-gradient(180deg,var(--ciel-2) 0%,var(--gris) 58%)}
+.amb-sauge{background:linear-gradient(180deg,var(--sauge-2) 0%,var(--gris) 58%)}
+.amb-ardoise{background:linear-gradient(180deg,var(--ardoise-2) 0%,var(--gris) 58%)}
+.amb-sable{background:linear-gradient(180deg,var(--sable-2) 0%,var(--gris) 58%)}
+.amb-peche{background:linear-gradient(180deg,var(--peche-2) 0%,var(--gris) 58%)}
+.amb-gris{background:linear-gradient(180deg,#EBEBEE 0%,var(--gris) 35%,#fff 100%)}
+.haut .notes span,.haut .parcours a{background:#fff}
+.haut .cote.gauche,.haut .cote.droite{top:auto}
+.haut .cote.gauche{left:clamp(16px,5vw,90px);bottom:0}
+.haut .cote.droite{right:clamp(16px,5vw,90px);bottom:clamp(40px,5vw,84px)}
+.haut .cote .max{width:clamp(150px,16vw,240px);height:auto}
+.haut .cote .obj:not(.max){width:clamp(100px,11vw,170px);height:auto}
+.haut .cote.droite .max{width:clamp(140px,15vw,220px)}
+.haut .cote.droite:has(.max){bottom:0}
+@media (max-width:900px){
+  .haut .cote.droite{display:none}
+  .haut .cote.gauche{display:block;left:50%;transform:translateX(-50%)}
+  .haut .cote .max{width:150px}
+  .haut:has(.cote.gauche) .haut-in{padding-bottom:190px}
+}
+
+/* ------------------------------------------------------------------ L'accueil (note 21) : « Notre objectif », la fin « Le travail change » */
+.ob-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:36px}
+.ob-c{padding:24px 22px 22px;border-radius:var(--r-carte);background:#fff;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--encre);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.ob-c:hover{transform:translateY(-2px);box-shadow:var(--ombre-forte)}
+.ob-o{height:68px;display:flex;align-items:flex-end;margin-bottom:8px}
+.ob-o .obj{width:auto;height:64px;max-width:76px;object-fit:contain;object-position:left bottom;filter:drop-shadow(0 10px 14px rgba(0,0,0,.12))}
+.ob-c h3{font-size:21px;letter-spacing:-.03em;line-height:1.15}
+.ob-c p{font-size:14.5px;line-height:1.45;color:var(--texte2)}
+.ob-c .ob-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:12px}
+.ob-tags span{padding:5px 10px;border-radius:9px;background:var(--gris);font-size:12.5px;font-weight:600;color:var(--encre)}
+.ob-c .lien{margin-top:10px;font-size:14px}
+.ob-sr{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:28px;font-size:15px;color:var(--texte2);text-align:left}
+.ob-sr .ico{width:20px;height:20px;flex:none;color:var(--encre)}
+.ob-sr b{color:var(--encre)}
+@media (max-width:1000px){.ob-4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.ob-4{grid-template-columns:minmax(0,1fr)}.ob-sr{align-items:flex-start;justify-content:flex-start}}
+
+/* la fin de l'accueil : la carte noire « Le travail change » */
+.fin.tc .t2{max-width:13em;font-size:clamp(32px,4.4vw,56px);line-height:1.03;letter-spacing:-.05em;color:#fff}
+.tc-mots{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:30px;max-width:900px}
+.tc-mots span{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:14px;background:rgba(255,255,255,.08);font-size:16px;font-weight:600;color:#fff}
+.tc-mots .ico{width:18px;height:18px}
+.fin.tc .chapo{margin-top:26px;color:rgba(255,255,255,.72);max-width:36em;text-wrap:balance;text-align:center}
+@media (max-width:560px){.tc-mots{gap:8px}.tc-mots span{padding:9px 12px;font-size:14.5px}}
+
 /* ------------------------------------------------------------------ À propos (outils/pages/apropos.py) : pourquoi, réalisations, espace, questions */
 .ap-profil{max-width:940px;margin:0 auto}
 .ap-profil .logos img[src*="logo-resto"]{max-height:42px}
@@ -692,6 +749,73 @@ main > .fin:last-child + * {margin-top:0}
 .ap-change{margin-top:18px;font-size:13px;font-weight:700;color:var(--encre)}
 .ap-change + .stats-p{margin-top:8px}
 .btn .lg-mot{height:1.15em;vertical-align:-.3em;margin-left:-1px}
+
+/* ------------------------------------------------------------------ L'assistant, en bas à droite (notes 20 et 21) */
+.as{position:fixed;right:max(20px,env(safe-area-inset-right));bottom:max(20px,env(safe-area-inset-bottom));z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:12px;pointer-events:none}
+.as>*{pointer-events:auto}
+.as-bt{position:relative;width:62px;height:62px;border-radius:50%;background:linear-gradient(180deg,#F7F7F9,#E9E9EE);box-shadow:0 2px 6px rgba(0,0,0,.08),0 16px 36px rgba(0,0,0,.18);display:grid;place-items:center;overflow:hidden;transition:transform .2s var(--ease)}
+.as-bt:hover{transform:translateY(-2px)}
+.as-bt .as-av-img{width:50px;height:50px;object-fit:contain;margin-top:10px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
+.as-bt-x{position:absolute;inset:0;display:none;place-items:center;background:var(--encre);color:#fff;font-size:28px;font-weight:300}
+.as.ouvert .as-bt-x{display:grid}
+.as-bulle{position:relative;max-width:260px;border-radius:18px 18px 6px 18px;background:#fff;box-shadow:var(--ombre-forte);animation:as-in .35s var(--ease) both}
+.as-bulle[hidden]{display:none}
+.as-bulle-t{display:block;padding:14px 38px 14px 16px;text-align:left;font-size:14px;line-height:1.4;color:var(--texte2)}
+.as-bulle-t b{display:block;color:var(--encre);font-size:15px;margin-bottom:2px}
+.as-bulle-x{position:absolute;top:6px;right:6px;width:28px;height:28px;border-radius:50%;font-size:18px;color:var(--doux)}
+.as-bulle-x:hover{background:var(--gris)}
+@keyframes as-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.as-bulle{animation:none}}
+.as-p{width:380px;max-width:calc(100vw - 32px);height:min(560px,calc(100svh - 120px));border-radius:24px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.06),0 30px 70px rgba(0,0,0,.22);overflow:hidden;display:flex;flex-direction:column;animation:as-in .25s var(--ease) both}
+.as-p[hidden]{display:none}
+.as-h{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--gris)}
+.as-av{width:42px;height:42px;border-radius:50%;background:#fff;display:grid;place-items:center;overflow:hidden;flex:none}
+.as-av .as-av-img{width:34px;height:34px;object-fit:contain;margin-top:6px}
+.as-h b{display:block;font-size:15px;color:var(--encre)}
+.as-h span{display:block;font-size:12.5px;line-height:1.35;color:var(--doux)}
+.as-h .lg-mot{height:1.05em;vertical-align:-.28em;color:var(--encre)}
+.as-x{margin-left:auto;width:34px;height:34px;border-radius:50%;font-size:22px;line-height:1;color:var(--doux);flex:none}
+.as-x:hover{background:#fff}
+.as-c{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:10px}
+.as-m{max-width:88%;padding:11px 14px;border-radius:16px;font-size:14.5px;line-height:1.45;color:var(--encre)}
+.as-m.bot{background:var(--gris);border-bottom-left-radius:6px}
+.as-m.moi{align-self:flex-end;background:var(--encre);color:#fff;border-bottom-right-radius:6px}
+.as-m a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.as-m.rep{display:flex;flex-direction:column;gap:6px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--gris2)}
+.as-m.rep b{font-size:14.5px}
+.as-m.rep span{font-size:14px;color:var(--texte2)}
+.as-m.rep a,.as-cr .as-tous,.as-lien{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;text-decoration:none;color:var(--encre)}
+.as-m .ico,.as-cr .ico,.as-btn .ico{width:14px;height:14px}
+.as-m.nu{background:none;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.as-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:99px;background:var(--encre);color:#fff!important;font-size:14.5px;font-weight:600;text-decoration:none!important}
+.as-choix{display:flex;flex-direction:column;gap:8px}
+.as-choix button,.as-cr a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--gris2);font-size:14.5px;font-weight:600;color:var(--encre);text-align:left;transition:background .15s}
+.as-choix button:hover,.as-cr a:hover{background:var(--gris)}
+.as-choix .ico{width:18px;height:18px;flex:none}
+.as-choix.petit{flex-direction:row;flex-wrap:wrap}
+.as-choix.petit button{padding:8px 12px;font-size:13px;font-weight:600;border-radius:12px}
+.as-cr{display:flex;flex-direction:column;gap:8px}
+.as-cr a{flex-direction:column;align-items:flex-start;gap:1px;font-weight:500;font-size:13.5px;color:var(--texte2)}
+.as-cr a b{font-size:14.5px;color:var(--encre)}
+.as-cr .as-tous{box-shadow:none;background:none;padding:4px 2px;flex-direction:row}
+.as-i{display:flex;align-items:center;gap:8px;margin:0 12px 12px;padding:6px 6px 6px 14px;border-radius:16px;background:var(--gris)}
+.as-i input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:16px;color:var(--encre);outline:none;padding:6px 0}
+.as-i input::placeholder{color:var(--doux)}
+.as-i button{width:38px;height:38px;border-radius:12px;background:var(--encre);color:#fff;display:grid;place-items:center;flex:none}
+.as-i .ico{width:16px;height:16px}
+.as-i:focus-within{box-shadow:0 0 0 2px var(--encre)}
+.as-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:560px){
+  .as{right:12px;bottom:max(12px,env(safe-area-inset-bottom));left:12px;align-items:flex-end}
+  .as-p{width:100%;max-width:none;height:min(78svh,620px)}
+  .as-bt{width:56px;height:56px}
+}
+
+/* La barre se cache quand on descend et revient quand on remonte (note 21 : sur téléphone et tablette ; site.js) */
+@media (max-width:1020px){
+  .barre{transition:transform .32s var(--ease)}
+  .barre.cachee{transform:translate(-50%,calc(-100% - 28px))}
+}
 
 /* ------------------------------------------------------------------ le blog (outils/pages/blog.py) : l'index et les articles */
 .p-blog .haut .boutons:empty{display:none}
@@ -785,6 +909,13 @@ main > .fin:last-child + * {margin-top:0}
 /* le parcours et le zigzag sur téléphone : pas de trait en bout de ligne ; le visuel (et son numéro) avant le texte, plus petit */
 @media (max-width:600px){.me-parcours .sep{display:none}}
 @media (max-width:860px){.me-zz .zz-v{order:-1;min-height:160px}.me-zz .zz-v .obj{width:104px}}
+
+/* Suivre (note 21) : « L'IA change tous les mois. Vos outils suivent. », trois cartes avec un objet 3D */
+.ev-l{display:flex;flex-direction:column;gap:10px}
+.ev-l>div{display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:18px;background:#fff;box-shadow:var(--ombre)}
+.ev-l .obj{width:52px;height:52px;object-fit:contain;flex:none;filter:drop-shadow(0 8px 12px rgba(0,0,0,.12))}
+.ev-l span{font-size:14.5px;line-height:1.45;color:var(--texte2)}
+.ev-l b{display:block;font-size:16px;color:var(--encre);margin-bottom:2px}
 
 /* ------------------------------------------------------------------ Métiers : /metiers (classes mt-)
    Le choix du métier reprend la mécanique des quinze familles (data-agit) mais se montre autrement : une grille de neuf
@@ -953,3 +1084,218 @@ main > .fin:last-child + * {margin-top:0}
 
 /* le sommaire du haut : sur téléphone, la barre suffit */
 @media (max-width:640px){.ou-sommaire{display:none}}
+
+/* ------------------------------------------------------------------ Le téléphone et la tablette (note 21 : « reprendre les tailles, les alignements et l'intégration sur mobile »)
+   Chargé en dernier (sorted() : « zz- » passe après tous les autres). Rien ici ne s'applique au-dessus de 960 px : l'ordinateur ne bouge pas.
+
+   LA RÈGLE D'ALIGNEMENT (téléphone, et tablette dès qu'une mise en page passe sur une colonne)
+   1. L'en-tête d'une section (l'étiquette, le titre, le chapeau) est centré. Toujours, y compris quand il est à gauche
+      d'un visuel sur ordinateur (« split », métiers, preuves) : sur une colonne, le visuel passe dessous et l'en-tête
+      redevient l'en-tête de la section. Seul « À lire aussi » suit aussi la règle.
+   2. Le contenu est aligné à gauche : le texte courant, les listes, les cartes, les étapes, les questions, les projets,
+      les blocs « étape » du zigzag et les thèmes des questions fréquentes (ce sont des contenus, pas des en-têtes).
+   3. Les boutons d'une section sont sur toute la largeur (420 px au plus, centrés), empilés, le principal d'abord ;
+      un bouton-lien (« Réserver un appel → ») se centre dessous. Sur tablette, ils gardent leur largeur et se centrent.
+      Les liens dans les cartes (« En savoir plus → ») restent à gauche, avec la carte.
+   4. Les petites notes isolées (une source, une légende) sont centrées ; une note avec une icône devient un conteneur
+      gris, texte à gauche.
+   5. Les chiffres et les cartes à icône passent en ligne : l'icône à gauche du titre, plus de grandes cases vides. */
+
+/* les captures de la plateforme : sur téléphone, la version prise en largeur téléphone (composants.en_telephone) */
+.fenetre picture{display:block}
+
+/* ================================================================== tablette et téléphone (≤ 960 px) */
+@media (max-width:960px){
+  /* l'en-tête des blocs métiers et preuves de l'accueil, passés sur une colonne */
+  .metiers-a > div:first-child,.preuves-a > div:first-child{display:flex;flex-direction:column;align-items:stretch}
+  .metiers-a > div:first-child > .chip,.preuves-a > div:first-child > .chip{align-self:center}
+  .metiers-a > div:first-child > .t2,.preuves-a > div:first-child > .t2,
+  .metiers-a > div:first-child > .chapo,.preuves-a > div:first-child > .chapo{text-align:center;margin-left:auto;margin-right:auto}
+  .preuves-a > div:first-child > .chapo{margin-top:14px}
+  .metiers-a > div:first-child > .renvoi{text-align:center}
+  .preuves-a > div:first-child > .boutons{justify-content:center}
+  /* trois cartes sur deux colonnes : la dernière prend la largeur, plus de case vide */
+  .cartes.c3 > :last-child:nth-child(odd){grid-column:1/-1}
+  .gains-a .cartes > :last-child:nth-child(odd){grid-column:1/-1}
+  /* l'équipe (pourquoi) : pas de places vides en bande au bord de l'écran */
+  .ap-equipe{grid-template-columns:minmax(0,1fr);margin:0}
+  .ap-place{display:none}
+  /* deux panneaux gris qui se suivent (suivi-ia) : un écart, pas une encoche */
+  .panneau + .panneau{margin-top:var(--marge)}
+  /* des cibles d'au moins 44 px au doigt : le pied, le sommaire et les détails des exemples */
+  .pied .bas nav a{display:inline-block;padding:12px 0}
+  .pied .marque .logo{padding:8px 0}
+  .doc-som a{padding:12px 10px}
+  main .doc-corps details > summary{min-height:44px}
+  .barre .logo{padding:10px 8px 10px 0;margin:-10px auto -10px 0}
+}
+
+/* ================================================================== dès que le « split » passe sur une colonne (≤ 900 px) */
+@media (max-width:900px){
+  .split-t{display:flex;flex-direction:column;align-items:stretch}
+  .split-t > .chip{align-self:center}
+  .split-t > .t2,.split-t > .chapo{text-align:center;margin-left:auto;margin-right:auto}
+  .split-t > .boutons{justify-content:center}
+  .split-t > .renvoi{text-align:center}
+  .a-lire .t3{text-align:center}
+
+  /* le haut de page : MAX posé dans le flux, centré sous le contenu (plus jamais sur les pastilles) */
+  .haut .cote.gauche{position:relative;order:2;left:auto;right:auto;top:auto;bottom:auto;transform:none;align-self:center;margin-top:-6px}
+  .haut .cote.gauche .obj,.haut .cote.gauche .max{width:auto;height:clamp(150px,22vw,196px);max-width:240px}
+  .haut:has(.cote.gauche) .haut-in{padding-bottom:30px;flex:1}
+}
+/* la tablette debout : le haut ne s'étire pas sur toute la hauteur d'un grand écran (trop de vide entre le texte et MAX) */
+@media (min-width:641px) and (max-width:900px){
+  .haut{min-height:min(calc(100svh - var(--marge)),880px)}
+}
+
+/* ================================================================== le téléphone (≤ 640 px) */
+@media (max-width:640px){
+  :root{--cote:20px;--r-panneau:28px}
+  .panneau > .mw{padding-left:14px;padding-right:14px}
+  .sec{padding:64px 0}
+  .sec.serre{padding-top:32px}
+  .entete{margin-bottom:28px}
+
+  /* ---- les titres et les textes */
+  .t2{font-size:clamp(27px,7.4vw,31px);line-height:1.1}
+  .chapo{font-size:16.5px}
+  .haut-c .chapo{font-size:17px}
+  .zz-t .t2{font-size:clamp(25px,6.8vw,28px)}
+  .projet h2{font-size:clamp(25px,6.8vw,28px)}
+
+  /* ---- la règle des boutons : toute la largeur, empilés, centrés */
+  main .boutons{flex-direction:column;align-items:stretch;gap:10px;width:100%;max-width:420px;margin-left:auto;margin-right:auto}
+  main .boutons .btn{width:100%}
+  main .renvoi{display:flex;justify-content:center}
+  main .renvoi .btn{width:100%;max-width:420px}
+  .cr-tous{display:flex}
+  .cr-tous .btn{width:100%}
+  .split-t > .boutons{margin-top:24px}
+
+  /* ---- le haut de page */
+  .haut-in{padding-top:118px}
+  .haut .notes{flex-direction:column;align-items:center;gap:6px;margin-top:24px}
+  .haut .parcours{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;max-width:400px;margin-left:auto;margin-right:auto}
+  .haut .parcours .sep{display:none}
+  .haut .parcours a{justify-content:center;min-height:44px}
+  .sommaire{gap:6px}
+  .sommaire a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px}
+  .p404 .haut-in{min-height:0}
+  /* un haut sans visuel (les pages de texte) n'occupe pas tout l'écran pour un titre seul */
+  .haut:not(:has(.cote.gauche)){min-height:0}
+  .haut:not(:has(.cote.gauche)) .haut-in{padding-bottom:56px}
+
+  /* ---- les notes : une note à icône devient un conteneur gris, texte à gauche */
+  p.avant,span.avant{display:flex;align-items:flex-start;gap:10px;width:100%;padding:13px 16px;border-radius:16px;text-align:left;line-height:1.45}
+  p.avant .ico,span.avant .ico{margin-top:1px;flex:none}
+  .ap-avant,p.centre:has(> span.avant){text-align:left}
+  .ob-sr{justify-content:flex-start;align-items:flex-start;margin-top:22px;padding:16px 18px;border-radius:18px;background:var(--gris)}
+  .ob-sr .ico{margin-top:1px}
+
+  /* ---- les cartes à icône : l'icône à gauche du titre */
+  .cartes > .carte-i:has(> .obj,> .pic),.articles > .article-c:has(> .obj){display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:16px;align-items:center;padding:22px}
+  .cartes > .carte-i:has(> .obj,> .pic) > *,.articles > .article-c:has(> .obj) > *{grid-column:1/-1}
+  .cartes > .carte-i > .obj,.cartes > .carte-i > .pic,.articles > .article-c > .obj{grid-column:1;grid-row:1/span 2;width:48px;height:48px;max-width:48px;object-fit:contain;object-position:center;margin:0;align-self:center}
+  .cartes > .carte-i:has(> .obj,> .pic) > .k,.articles > .article-c:has(> .obj) > .k{grid-column:2;grid-row:1;align-self:end;margin:0 0 3px}
+  .cartes > .carte-i:has(> .obj,> .pic) > h3,.articles > .article-c:has(> .obj) > h3{grid-column:2;grid-row:2;align-self:start}
+  .cartes > .carte-i:has(> .obj,> .pic):not(:has(> .k)) > .obj,
+  .cartes > .carte-i:has(> .obj,> .pic):not(:has(> .k)) > .pic,
+  .articles > .article-c:has(> .obj):not(:has(> .k)) > .obj{grid-row:1}
+  .cartes > .carte-i:has(> .obj,> .pic):not(:has(> .k)) > h3,
+  .articles > .article-c:has(> .obj):not(:has(> .k)) > h3{grid-row:1;align-self:center}
+  .cartes > .carte-i:has(> .obj,> .pic) > p,.articles > .article-c:has(> .obj) > p{margin-top:12px}
+  .cartes > .carte-i:has(> .obj,> .pic) > .ex{margin-top:14px}
+  .ou-duo .carte-i{padding:22px}
+  .gains-a .cartes{grid-auto-rows:auto}
+
+  /* « Notre objectif » : la même carte en ligne */
+  .ob-4{gap:10px;margin-top:28px}
+  .ob-c{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:16px;row-gap:4px;padding:20px}
+  .ob-c > *{grid-column:1/-1}
+  .ob-c > .ob-o{grid-column:1;grid-row:1/span 2;height:52px;margin:0;align-self:center;align-items:center;justify-content:center}
+  .ob-o .obj{height:50px;max-width:52px;object-position:center}
+  .ob-c > h3{grid-column:2;grid-row:1;align-self:end;font-size:20px}
+  .ob-c > p:not(.ob-tags){grid-column:2;grid-row:2;align-self:start}
+  .ob-c .ob-tags{padding-top:14px}
+
+  /* ---- la frise (les étapes) : l'objet et son numéro à gauche, le texte à droite */
+  .frise{gap:22px;margin-top:26px}
+  .frise li{display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:16px;align-items:start}
+  .frise li > .obj{grid-column:1;grid-row:1/span 2;width:52px;height:52px}
+  .frise li > .nn{position:absolute;left:32px;top:32px;margin:0;width:24px;height:24px;font-size:12px;box-shadow:0 0 0 3px #fff}
+  .panneau .frise li > .nn{box-shadow:0 0 0 3px var(--gris)}
+  .frise li > h3{grid-column:2;margin-top:3px;font-size:17.5px}
+  .frise li > p{grid-column:2;margin-top:4px}
+
+  /* ---- les chiffres : la valeur à gauche, ce qu'elle dit à droite */
+  .preuves-a .stats{grid-template-columns:minmax(0,1fr);gap:8px}
+  .preuves-a .stat{flex-direction:row;align-items:center;gap:16px;padding:14px 18px}
+  .preuves-a .stat b{flex:none;min-width:98px;font-size:24px}
+  .projet .stats-p span{flex:1 1 auto}
+
+  /* ---- les barres : le métier ne se coupe pas */
+  .be-h span{white-space:nowrap}
+
+  /* ---- le zigzag de la méthode : un visuel plus bas */
+  .me-zz .zz-v,.zz-v{min-height:136px}
+  .me-zz .zz-v .obj{width:92px!important}
+  .zz{gap:52px}
+
+  /* ---- les familles et les métiers : des cibles de 44 px */
+  .agit-liste button{min-height:44px;padding:6px 14px}
+
+  /* ---- l'équipe (pourquoi) : le profil moins large, les logos rangés deux par deux */
+  .profil{padding:22px}
+  .profil .photo{max-width:150px}
+  .ap-profil .logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .ap-profil .logos a{height:52px;padding:0 12px}
+  .ap-profil .logos a:last-child:nth-child(odd){grid-column:1/-1}
+
+  /* ---- l'espace Claude Team (outils) : une note par ligne */
+  .ou-team-n span{flex-basis:100%;width:auto;height:0}
+
+  /* ---- les exemples posés dans la page : un sommaire qui se touche */
+  .doc-som summary{padding:12px 0}
+  .doc-som{padding-top:6px;padding-bottom:6px}
+  main .doc-x-rapport .run{flex-wrap:wrap;row-gap:4px}
+  main .doc-x-rapport .run .rr span{white-space:nowrap}
+  main .doc-x-rapport .page{padding-left:8px;padding-right:8px}
+  main .doc-x-rapport .sheet{padding-left:20px;padding-right:20px}
+  main .doc-x-rapport .mp{row-gap:0}
+  main .doc-x-rapport .mp a{min-height:40px}
+
+  /* ---- la fin noire */
+  .fin .max{width:88px}
+  .tc-mots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;max-width:420px}
+  .tc-mots span{justify-content:center}
+  .fin-mail{line-height:1.7}
+  .fin-mail a{white-space:nowrap}
+
+  /* ---- le pied : les liens en lignes, chaque groupe sous le précédent (moins long, toujours lisible) */
+  .pied{padding-top:44px}
+  .pied .marque{padding-bottom:28px}
+  .pied-haut{gap:30px}
+  .pied .cols{grid-template-columns:minmax(0,1fr);gap:22px}
+  .pied h3{margin-bottom:4px;font-size:13.5px}
+  .pied ul{display:flex;flex-wrap:wrap;gap:0 20px;font-size:15px}
+  .pied ul a{display:inline-block;padding:8px 0}
+  .pied .bas{flex-direction:column;gap:4px;margin-top:30px}
+
+  /* ---- le menu du téléphone : « Voir la page » se touche facilement */
+  .menu .voir{padding:12px 14px 14px}
+}
+
+/* ================================================================== les petits téléphones (≤ 380 px) */
+@media (max-width:380px){
+  .haut-c .t1{font-size:38px}
+  .preuves-a .stat b{min-width:88px;font-size:22px}
+  .be-l{grid-template-columns:58px minmax(0,1fr) 84px}
+}
+
+/* sur téléphone, les hauts des autres pages prennent la hauteur de leur contenu (plus de vide entre le texte et MAX) ;
+   l'accueil garde tout l'écran */
+@media (max-width:600px){
+  body:not(.p-accueil) .haut{min-height:0}
+  body:not(.p-accueil) .haut .haut-in{flex:none;justify-content:flex-start}
+}

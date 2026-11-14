@@ -39,6 +39,18 @@
     marquer();
     window.addEventListener('hashchange', marquer);
 
+    // ---- sur téléphone et tablette, la barre se cache quand on descend et revient quand on remonte (note 21)
+    let dernierY = scrollY;
+    const petitEcran = window.matchMedia('(max-width:1020px)');
+    window.addEventListener('scroll', () => {
+      const y = scrollY;
+      const menuOuvert = barre.querySelector('.menu.ouvert');
+      if (!petitEcran.matches || menuOuvert || y < 120) barre.classList.remove('cachee');
+      else if (y > dernierY + 6) barre.classList.add('cachee');
+      else if (y < dernierY - 6) barre.classList.remove('cachee');
+      dernierY = y;
+    }, { passive: true });
+
     // ---- le menu du téléphone
     const btn = barre.querySelector('.menu-btn');
     const menu = document.getElementById('menu');
