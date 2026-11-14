@@ -652,6 +652,14 @@ main > .fin:last-child + * {margin-top:0}
   .haut:has(.cote.gauche) .haut-in{padding-bottom:190px}
 }
 
+/* ------------------------------------------------------------------ 14/11 (note 22) */
+/* la petite mention d'une carte devient une pastille en haut à droite quand la carte a un objet ; sinon, une pastille au-dessus du titre */
+.carte-i{position:relative}
+.carte-i > .k{align-self:flex-start;margin:0 0 10px;padding:5px 11px;border-radius:99px;background:#fff;font-size:12px;font-weight:600;line-height:1.3;color:var(--encre)}
+.panneau .carte-i > .k{background:var(--gris)}
+.carte-i:has(> .obj) > .k{position:absolute;top:22px;right:22px;margin:0;max-width:55%;text-align:right}
+.carte-i.noire > .k{background:rgba(255,255,255,.12);color:#fff}
+
 /* ------------------------------------------------------------------ L'accueil (note 21) : « Notre objectif », la fin « Le travail change » */
 .ob-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:36px}
 .ob-c{padding:24px 22px 22px;border-radius:var(--r-carte);background:#fff;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--encre);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
@@ -676,6 +684,99 @@ main > .fin:last-child + * {margin-top:0}
 .tc-mots .ico{width:18px;height:18px}
 .fin.tc .chapo{margin-top:26px;color:rgba(255,255,255,.72);max-width:36em;text-wrap:balance;text-align:center}
 @media (max-width:560px){.tc-mots{gap:8px}.tc-mots span{padding:9px 12px;font-size:14.5px}}
+/* « Notre objectif » (note 22 : le haut des cartes trop fade) : l'objet posé sur une tuile grise */
+.ob-o{width:76px;height:76px;border-radius:20px;background:var(--gris);display:grid;place-items:center;margin-bottom:12px}
+.ob-o .obj{height:56px;max-width:60px;object-position:center}
+
+/* ------------------------------------------------------------------ le haut de l'accueil (notes 21 et 22) : toute la hauteur, le titre plus haut,
+   le petit MAX qui parle à gauche, MAX au travail à droite, la bande des preuves visible dès l'arrivée */
+.ha{position:relative;margin:var(--marge) var(--marge) 0;border-radius:var(--r-panneau);overflow:hidden;min-height:calc(100svh - var(--marge));display:flex;flex-direction:column;background:linear-gradient(180deg,#E8E8EB 0%,#F2F2F4 40%,#fff 92%)}
+.ha-c{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:clamp(116px,14vh,150px)}
+.ha .t1{margin-top:20px;font-size:clamp(40px,5.6vw,80px);line-height:1.01;letter-spacing:-.05em;max-width:12.5em;text-wrap:balance}
+.ha .chapo{margin-top:20px;font-size:clamp(17px,1.5vw,20.5px);line-height:1.5;max-width:36em;text-wrap:balance}
+.ha .boutons{margin-top:30px;justify-content:center}
+.ha .notes{margin-top:22px}
+.ha .notes span{background:#fff}
+.ha-max{position:absolute;height:auto;filter:drop-shadow(0 22px 30px rgba(0,0,0,.18));pointer-events:none}
+.ha-max{z-index:0}
+.ha-c{z-index:1}
+.ha-max.g{left:clamp(16px,4vw,90px);top:clamp(230px,30vh,320px);width:clamp(110px,10.5vw,190px)}
+.ha-max.d{right:clamp(16px,4vw,90px);top:clamp(170px,22vh,250px);width:clamp(140px,13vw,230px)}
+.ha-pv{margin-top:auto;padding:clamp(20px,4vh,44px) 0 clamp(14px,2vh,24px)}
+.ha-pv-t{text-align:center;font-size:13px;font-weight:700;color:var(--doux)}
+.ha-defile{overflow:hidden;padding:16px 0 22px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 5%,#000 95%,transparent 100%)}
+.ha-rail{display:flex;gap:14px;width:max-content;padding:0 7px;animation:ha-def 70s linear infinite}
+.ha-dbl{display:contents}
+.ha-defile:hover .ha-rail{animation-play-state:paused}
+@keyframes ha-def{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ha-rail{animation:none}.ha-defile{overflow-x:auto}}
+.pv-k{flex:none;width:248px;border-radius:20px;display:flex;flex-direction:column;overflow:hidden;color:var(--encre);transition:transform .2s var(--ease)}
+.pv-k:hover{transform:translateY(-3px)}
+.pv-k b{font-size:27px;letter-spacing:-.045em;line-height:1}
+.pv-k span{font-size:13.5px;line-height:1.4}
+/* les photos : la photo en haut, le chiffre dessous, sur une carte blanche */
+.pv-k.photo{background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05),0 16px 36px -18px rgba(0,0,0,.22)}
+.pv-k .k-img{position:relative;display:block;height:118px;overflow:hidden;background:#111}
+.pv-k .k-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pv-k .k-img .k-logo{position:absolute;left:12px;bottom:10px;height:20px;display:flex;align-items:center}
+.pv-k .k-img .k-logo img{width:auto;height:auto;max-height:18px;max-width:84px;object-fit:contain;filter:drop-shadow(0 1px 4px rgba(0,0,0,.6))}
+.pv-k .k-img .k-logo img.carre{max-height:26px;border-radius:7px}
+.pv-k .k-tx{display:flex;flex-direction:column;gap:5px;padding:14px 16px 16px}
+.pv-k.photo .k-tx span{color:var(--texte2)}
+/* noires : le logo en blanc */
+.pv-k.noir{padding:18px;min-height:150px;gap:6px;background:linear-gradient(180deg,#1C1D21,#0B0B0C);box-shadow:0 16px 36px -18px rgba(0,0,0,.45)}
+.pv-k.noir .k-logo{height:22px;display:flex;align-items:center;margin-bottom:auto}
+.pv-k.noir .k-logo img{max-height:20px;width:auto;max-width:90px;object-fit:contain}
+.pv-k.noir .k-logo img.carre{max-height:28px;border-radius:7px}
+.pv-k.noir b{margin-top:18px;color:#fff}
+.pv-k.noir span{color:rgba(255,255,255,.68)}
+/* le logo seul, sur une carte blanche */
+.pv-k.logo{padding:18px;min-height:150px;gap:6px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.05),0 16px 36px -18px rgba(0,0,0,.22)}
+.pv-k.logo .k-logo{height:22px;display:flex;align-items:center;margin-bottom:auto}
+.pv-k.logo .k-logo img{max-height:18px;width:auto;max-width:84px;object-fit:contain}
+.pv-k.logo .k-logo img.carre{max-height:28px;border-radius:7px}
+.pv-k.logo b{margin-top:18px}
+.pv-k.logo span{color:var(--texte2)}
+/* le haut en noir (test) */
+.ha.ha-noir{background:radial-gradient(70% 60% at 50% 0%,#2A2C33 0%,#131418 55%,#0B0B0C 100%)}
+.ha-noir .t1{color:#fff}
+.ha-noir .chapo{color:#C9C9D1}
+.ha-noir .chip{background:rgba(255,255,255,.12);color:#fff}
+.ha-noir .notes span{background:rgba(255,255,255,.08);color:#fff}
+.ha-noir .boutons .btn.lien{color:#fff}
+.ha-noir .ha-pv-t{color:#A1A1A6}
+.ha-noir .ha-max{filter:drop-shadow(0 0 1px rgba(255,255,255,.35)) drop-shadow(0 22px 40px rgba(0,0,0,.8))}
+.ha-noir .ha-max.g,.ha-noir .ha-max.d{background:radial-gradient(closest-side,rgba(255,255,255,.14),transparent)}
+@media (max-width:900px){
+  .ha-max{display:none}
+  .ha-c{padding-top:112px}
+  .ha .boutons{flex-direction:column;align-items:center;width:100%;max-width:420px}
+  .ha .boutons .btn.noir,.ha .boutons .btn.blanc{width:100%;justify-content:center}
+  .ha .notes{flex-direction:column;align-items:center;gap:6px}
+  .ha-rail{animation:none}
+  .ha-defile{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;padding:12px var(--cote) 22px;scrollbar-width:none}
+  .ha-defile::-webkit-scrollbar{display:none}
+  .ha-dbl{display:none}
+  .pv-k{width:236px;scroll-snap-align:start}
+}
+
+/* ------------------------------------------------------------------ la méthode en quatre cartes, dans un conteneur gris (note 22) */
+.me4-avant{display:flex;align-items:center;justify-content:center;gap:8px;margin:26px auto 0;font-size:14.5px;font-weight:600;color:var(--encre)}
+.me4-avant .ico{width:17px;height:17px}
+.me4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+.me4-c{position:relative;display:flex;flex-direction:column;gap:8px;padding:22px;border-radius:var(--r-carte);background:#fff;box-shadow:var(--ombre);color:var(--encre);transition:transform .2s var(--ease)}
+.me4-c:hover{transform:translateY(-2px)}
+.me4-n{position:absolute;top:20px;right:20px;width:28px;height:28px;border-radius:50%;background:var(--encre);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.me4-c .obj{width:auto;height:60px;max-width:70px;object-fit:contain;object-position:left bottom;margin-bottom:8px}
+.me4-c h3{font-size:20px;letter-spacing:-.03em}
+.me4-c p{font-size:14.5px;line-height:1.45;color:var(--texte2)}
+.me4-c .lien{margin-top:auto;padding-top:8px;font-size:14px}
+@media (max-width:900px){.me4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.me4{grid-template-columns:minmax(0,1fr)}}
+/* pourquoi nous : quatre chiffres, puis les deux boutons au centre */
+#preuves .stats{margin-top:34px}
+#preuves .stat .obj{width:auto;height:44px;max-width:56px;object-fit:contain;object-position:left center}
+.centre-b{justify-content:center}
 
 /* ------------------------------------------------------------------ À propos (outils/pages/apropos.py) : pourquoi, réalisations, espace, questions */
 .ap-profil{max-width:940px;margin:0 auto}
@@ -810,6 +911,14 @@ main > .fin:last-child + * {margin-top:0}
   .as-p{width:100%;max-width:none;height:min(78svh,620px)}
   .as-bt{width:56px;height:56px}
 }
+/* l'avatar : les deux yeux de MAX sur un rond noir (note 22) */
+.as-bt{background:#0B0B0C}
+.as-bt .as-yeux{width:62px;height:62px}
+.as-av{background:none}
+.as-av .as-yeux{width:42px;height:42px}
+@media (max-width:560px){.as-bt .as-yeux{width:56px;height:56px}}
+/* sur une section noire, le rond reste visible */
+.as-bt{box-shadow:0 0 0 2px rgba(255,255,255,.9),0 16px 36px rgba(0,0,0,.25)}
 
 /* La barre se cache quand on descend et revient quand on remonte (note 21 : sur téléphone et tablette ; site.js) */
 @media (max-width:1020px){
@@ -1084,6 +1193,65 @@ main > .fin:last-child + * {margin-top:0}
 
 /* le sommaire du haut : sur téléphone, la barre suffit */
 @media (max-width:640px){.ou-sommaire{display:none}}
+
+/* ------------------------------------------------------------------ Les fonds (note 22 : « fond noir, fond gris, background blanc », à choisir dans les tests)
+   La classe du corps de page (accueil.py, CLASSES) dit le rythme :
+   r-noir        : la page blanche, des conteneurs gris un peu plus marqués, et deux conteneurs noirs (les gains, vos données)
+   r-gris        : la page blanche et des conteneurs gris plus marqués, sans noir
+   r-conteneurs  : la page grise, chaque section dans un conteneur blanc, les gains et vos données en noir */
+.r-noir .panneau,.r-gris .panneau{background:#EFEFF2}
+.r-noir .panneau .frise .nn,.r-gris .panneau .frise .nn{box-shadow:0 0 0 6px #EFEFF2}
+
+/* les barres : plus de rouge partout (note 22) ; aujourd'hui en gris, avec l'IA en noir */
+.be-l.avant .piste i{background:#B8B8C1}
+
+/* les conteneurs noirs */
+.r-noir #gains,.r-noir #espace,.r-conteneurs #gains,.r-conteneurs #espace{background:radial-gradient(90% 60% at 50% 0%,#24262C 0%,#121317 55%,#0B0B0C 100%);color:#fff}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .chip{background:rgba(255,255,255,.12);color:#fff}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .t2{color:#fff}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .chapo{color:#C9C9D1}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .carte-i{background:#18191D;box-shadow:none}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .carte-i h3{color:#fff}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .carte-i p{color:#B9B9C2}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .carte-i .pic{background:rgba(255,255,255,.1);color:#fff}
+:is(.r-noir,.r-conteneurs) #gains .barre-ex{background:#18191D}
+:is(.r-noir,.r-conteneurs) #gains .be-h b{color:#fff}
+:is(.r-noir,.r-conteneurs) #gains .be-h span,:is(.r-noir,.r-conteneurs) #gains .be-l small{color:#9A9AA3}
+:is(.r-noir,.r-conteneurs) #gains .piste{background:rgba(255,255,255,.08)}
+:is(.r-noir,.r-conteneurs) #gains .be-l.avant .piste i{background:#5D5E66}
+:is(.r-noir,.r-conteneurs) #gains .be-l.apres .piste i{background:#fff}
+:is(.r-noir,.r-conteneurs) #gains .be-l .v{color:#E5E5EA}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .barres-note,:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .legende{color:#9A9AA3}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .btn.gris{background:rgba(255,255,255,.12);color:#fff}
+:is(.r-noir,.r-conteneurs) :is(#gains,#espace) .btn.gris:hover{background:rgba(255,255,255,.2)}
+
+/* les couleurs des ambiances pour les barres « aujourd'hui » (r-gris : une couleur par ligne) */
+.r-gris .barre-ex:nth-child(4n+1) .be-l.avant .piste i{background:#E9A983}
+.r-gris .barre-ex:nth-child(4n+2) .be-l.avant .piste i{background:#D9C29A}
+.r-gris .barre-ex:nth-child(4n+3) .be-l.avant .piste i{background:#9DB8D6}
+.r-gris .barre-ex:nth-child(4n+4) .be-l.avant .piste i{background:#A9C9B5}
+
+/* la page grise, chaque section dans un conteneur blanc */
+body.r-conteneurs{background:#EDEDF0}
+.r-conteneurs main > .sec{margin:var(--marge) var(--marge) 0;border-radius:var(--r-panneau);background:#fff}
+.r-conteneurs main > .sec.panneau{background:#fff}
+.r-conteneurs .panneau .carte-i,.r-conteneurs .panneau .barre-ex,.r-conteneurs .panneau .tuiles a{background:var(--gris)}
+.r-conteneurs .sec:not(.panneau):not(.a-lire) + .sec:not(.panneau):not(.a-lire){padding-top:clamp(72px,9vw,116px)}
+.r-conteneurs .ha{background:linear-gradient(180deg,#fff 0%,#fff 100%)}
+
+/* ------------------------------------------------------------------ les hauts des autres pages (note 22 : le titre plus haut, bien proportionné à toutes les tailles)
+   hs-1 : la hauteur suit l'écran sans tout le prendre, le contenu centré un peu haut, MAX et l'objet à côté du texte
+   hs-2 : toute la hauteur, le contenu en haut, MAX et l'objet en grand, posés en bas */
+@media (min-width:901px){
+  .hs-1 .haut:not(.petit){min-height:clamp(560px,80svh,860px)}
+  .hs-1 .haut:not(.petit) .haut-in{justify-content:center;padding-top:clamp(104px,11vh,128px);padding-bottom:clamp(40px,5vh,64px)}
+  .hs-1 .haut .cote.gauche,.hs-1 .haut .cote.droite{top:52%;bottom:auto;transform:translateY(-40%)}
+  .hs-1 .haut .cote .max{width:clamp(150px,14vw,230px)}
+  .hs-1 .haut .cote .obj:not(.max){width:clamp(104px,10vw,160px)}
+  .hs-2 .haut:not(.petit) .haut-in{justify-content:flex-start;padding-top:clamp(150px,19vh,200px)}
+  .hs-2 .haut .cote .max{width:clamp(170px,17vw,270px)}
+  .hs-2 .haut .cote .obj:not(.max){width:clamp(120px,12vw,190px)}
+}
 
 /* ------------------------------------------------------------------ Le téléphone et la tablette (note 21 : « reprendre les tailles, les alignements et l'intégration sur mobile »)
    Chargé en dernier (sorted() : « zz- » passe après tous les autres). Rien ici ne s'applique au-dessus de 960 px : l'ordinateur ne bouge pas.
