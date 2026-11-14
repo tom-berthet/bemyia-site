@@ -80,7 +80,7 @@ a:hover .lien .ico,.lien:hover .ico{transform:translateX(3px)}
 .notes .ico{width:15px;height:15px}
 
 /* ------------------------------------------------------------------ la barre et ses menus */
-.barre{position:fixed;z-index:50;top:12px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 24px))}
+.barre{position:fixed;z-index:50;top:20px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 24px))}
 .barre-in{display:flex;align-items:center;height:60px;padding:0 9px 0 22px;border-radius:99px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:saturate(1.8) blur(18px);backdrop-filter:saturate(1.8) blur(18px);box-shadow:0 1px 2px rgba(0,0,0,.05),0 12px 32px rgba(0,0,0,.07)}
 .barre .logo{display:flex;align-items:center;color:var(--encre);margin-right:auto}
 .barre .logo svg{height:23px;width:auto}
@@ -102,7 +102,8 @@ a:hover .lien .ico,.lien:hover .ico{transform:translateX(3px)}
 .mm-lien .ico{width:14px;height:14px}
 .mm ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 10px;align-content:start}
 .mm li a{display:flex;gap:12px;align-items:flex-start;padding:11px 12px;border-radius:14px;transition:background .15s}
-.mm li a:hover{background:var(--gris)}
+.mm li a:hover,.mm li a.ici{background:var(--gris)}
+.mm li a.ici .pic{background:#fff}
 .mm .pic{width:36px;height:36px;border-radius:11px;background:var(--gris);display:grid;place-items:center;flex:none;color:var(--encre)}
 .mm li a:hover .pic{background:#fff}
 .mm .pic .ico{width:18px;height:18px}
@@ -130,6 +131,7 @@ a:hover .lien .ico,.lien:hover .ico{transform:translateX(3px)}
   .menu ul{padding:0 6px 8px}
   .menu ul a{display:flex;align-items:center;gap:10px;padding:10px 8px;font-size:15px;font-weight:600;color:var(--encre)}
   .menu ul .ico{width:17px;height:17px;color:var(--doux)}
+  .menu ul a.ici{background:#fff;border-radius:12px}
   .menu .boutons{margin:10px 4px 4px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .menu .boutons .large{grid-column:1/-1}
 }
@@ -437,7 +439,7 @@ a.carte-i:hover{transform:translateY(-2px);box-shadow:var(--ombre)}
 .zz-t .t2{margin-top:14px;font-size:clamp(26px,3vw,36px)}
 .zz-t .chapo{margin-top:12px}
 .zz-t .recu{margin-top:18px;padding:14px 16px;border-radius:14px;background:var(--gris);font-size:14.5px;line-height:1.5;color:var(--encre)}
-.zz-t .recu b{display:block;font-size:12.5px;color:var(--doux);margin-bottom:4px}
+.zz-t .recu b{display:block;font-size:13px;color:var(--encre);margin-bottom:4px}
 @media (max-width:860px){.zz-e{grid-template-columns:minmax(0,1fr)}.zz-e:nth-child(even) .zz-t{order:0}.zz-v{min-height:200px}}
 
 /* ------------------------------------------------------------------ le profil, les logos, les garanties */
@@ -610,6 +612,14 @@ main > .fin:last-child + * {margin-top:0}
 .p404 .obj{width:110px;margin-bottom:16px}
 .menu .boutons .btn{font-size:14px;padding:10px 12px}
 
+/* ------------------------------------------------------------------ 14/11 (note 20 de Tom) */
+/* le logo à la place du mot dans une phrase (« Pourquoi bemyia ») */
+.lg-mot{display:inline-block;height:1.12em;width:auto;vertical-align:-.27em;color:inherit}
+/* la grille des métiers et les quinze familles : quand un lien du menu y mène, le haut reste sous la barre */
+[data-agit]{scroll-margin-top:110px}
+/* les étoiles de Malt : toujours en jaune */
+.etoiles,.stat .etoiles,.lien .etoiles{color:#F5B301;letter-spacing:.04em}
+
 /* ------------------------------------------------------------------ À propos (outils/pages/apropos.py) : pourquoi, réalisations, espace, questions */
 .ap-profil{max-width:940px;margin:0 auto}
 .ap-profil .logos img[src*="logo-resto"]{max-height:42px}
@@ -627,6 +637,61 @@ main > .fin:last-child + * {margin-top:0}
 .ap-theme .faq{max-width:none;margin:0}
 @media (max-width:820px){.ap-theme{grid-template-columns:minmax(0,1fr)}.ap-theme-t{position:static;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}.ap-theme-t .obj{margin:0;width:40px}.ap-theme-t .t3{margin:0}.ap-theme-t .lien{flex-basis:100%}}
 @media (max-width:700px){.ap-profil .logos a{height:48px;padding:0 14px}.ap-profil .logos img{max-height:22px}.ap-profil .logos img[src*="logo-resto"]{max-height:34px}}
+
+/* ------------------------------------------------------------------ 14/11 (note 20) : l'équipe en carrousel, ce que nos experts savent faire, les six verbes */
+/* l'équipe : l'expert au centre, une place en retrait de chaque côté (d'autres experts pourront s'y ajouter) */
+.ap-equipe{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,940px) minmax(0,1fr);gap:18px;align-items:center;margin:0 calc(var(--cote) * -1)}
+.ap-equipe .ap-profil{margin:0;position:relative;z-index:1}
+.ap-place{height:78%;min-height:260px;border-radius:var(--r-carte);background:var(--gris);display:flex;flex-direction:column;justify-content:center;gap:12px;padding:28px;opacity:.75}
+.ap-place:first-child{border-top-left-radius:0;border-bottom-left-radius:0}
+.ap-place:last-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.ap-silh{width:64px;height:64px;border-radius:18px;background:var(--gris2);display:grid;place-items:center;color:var(--gris3)}
+.ap-silh .ico{width:32px;height:32px}
+.ap-place i{display:block;height:10px;border-radius:6px;background:var(--gris2);width:70%}
+.ap-place i + i{width:45%}
+.ap-profil .roles .lg-mot{height:1.1em;vertical-align:-.3em}
+.etoiles{font-size:.95em}
+@media (max-width:1100px){.ap-equipe{grid-template-columns:40px minmax(0,1fr) 40px;gap:12px}.ap-place{padding:0;min-height:200px}.ap-place>*{display:none}}
+@media (max-width:700px){.ap-equipe{grid-template-columns:14px minmax(0,1fr) 14px;gap:8px}.ap-place{min-height:160px;border-radius:12px}}
+
+/* ce que nos experts savent faire : une grille de cartes de tailles différentes */
+.sf{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.sf-c{position:relative;border-radius:var(--r-carte);overflow:hidden;min-width:0;isolation:isolate;display:flex;flex-direction:column;background:#fff;box-shadow:var(--ombre)}
+.sf-t{display:flex;flex-direction:column;gap:8px;padding:26px 28px 28px}
+.sf-t .k{font-size:13px;font-weight:600;color:var(--doux)}
+.sf-t h3{font-size:clamp(22px,2.3vw,29px);line-height:1.1;letter-spacing:-.035em;color:var(--encre)}
+.sf-t p{font-size:15.5px;line-height:1.45;color:var(--texte2)}
+.sf-video{grid-column:span 8;min-height:440px;background:#000;justify-content:flex-end}
+.sf-video video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.sf-video::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 68%,rgba(0,0,0,.88) 100%)}
+.sf-video h3,.sf-video p{color:#fff}.sf-video .k{color:rgba(255,255,255,.75)}
+.sf-agents{grid-column:span 4;background:var(--noir);justify-content:space-between}
+.sf-points{width:calc(100% - 56px);margin:28px 28px 0;height:auto}
+.sf-big{font-size:clamp(52px,5.6vw,72px);font-weight:700;letter-spacing:-.05em;line-height:.95;color:#fff}
+.sf-agents h3,.sf-agents p{color:#fff}.sf-agents p{color:rgba(255,255,255,.7)}
+.sf-3d,.sf-proto{grid-column:span 6}
+.sf-plats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 10px;padding:14px 30px 28px;align-items:center;justify-items:center;margin-top:auto}
+.sf-plats img{width:min(124px,100%);filter:drop-shadow(0 12px 16px rgba(0,0,0,.16))}
+.sf-tels{position:relative;height:270px;margin-top:auto;overflow:hidden}
+.sf-tels img{position:absolute;bottom:-90px;width:150px;filter:drop-shadow(0 18px 26px rgba(0,0,0,.22))}
+.sf-tels .t1{left:50%;transform:translateX(-50%);z-index:2;width:170px;bottom:-70px}
+.sf-tels .t0{left:50%;transform:translateX(calc(-50% - 132px)) rotate(-7deg)}
+.sf-tels .t2{left:50%;transform:translateX(calc(-50% + 132px)) rotate(7deg)}
+.sf-plus{grid-column:span 12;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.sf-plus ul{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.sf-plus li{font-size:17px;font-weight:600;letter-spacing:-.015em;line-height:1.35;color:var(--encre)}
+.sf-outils{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.sf-outil{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:12px;background:var(--gris);font-size:14px;font-weight:600;color:var(--encre)}
+.sf-outil svg{width:17px;height:17px}
+.sf-outil i{width:17px;height:17px;border-radius:5px;background:var(--encre);color:#fff;font-style:normal;font-size:11px;font-weight:700;display:grid;place-items:center}
+@media (max-width:900px){.sf-video,.sf-agents,.sf-3d,.sf-proto{grid-column:span 12}.sf-video{min-height:380px}.sf-agents{flex-direction:row;align-items:center}.sf-points{width:40%;margin:24px 0 24px 24px;flex:none}.sf-plus{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.sf-agents{flex-direction:column;align-items:stretch}.sf-points{width:calc(100% - 44px);margin:22px 22px 0}.sf-t{padding:22px}.sf-tels .t0{transform:translateX(calc(-50% - 104px)) rotate(-7deg)}.sf-tels .t2{transform:translateX(calc(-50% + 104px)) rotate(7deg)}}
+
+/* les six verbes et les projets */
+.ap-six .frise{margin-top:8px}
+.ap-change{margin-top:18px;font-size:13px;font-weight:700;color:var(--encre)}
+.ap-change + .stats-p{margin-top:8px}
+.btn .lg-mot{height:1.15em;vertical-align:-.3em;margin-left:-1px}
 
 /* ------------------------------------------------------------------ le blog (outils/pages/blog.py) : l'index et les articles */
 .p-blog .haut .boutons:empty{display:none}

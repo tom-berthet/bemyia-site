@@ -26,6 +26,18 @@
     barre.addEventListener('mouseenter', () => clearTimeout(minuterie));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') fermer(); });
     document.addEventListener('click', e => { if (!barre.contains(e.target)) fermer(); });
+    barre.querySelectorAll('.mm a').forEach(a => a.addEventListener('click', fermer));
+
+    // la page où l'on est : son lien est posé sur un fond gris dans les menus (note 20)
+    const chemin = p => p.replace(/\.html$/, '').replace(/\/(index)?$/, '') || '/';
+    const marquer = () => barre.querySelectorAll('.mm li a, .menu ul a').forEach(a => {
+      const v = new URL(a.getAttribute('href'), location.href);
+      const ici = v.origin === location.origin && chemin(v.pathname) === chemin(location.pathname) && (!v.hash || v.hash === location.hash);
+      a.classList.toggle('ici', ici);
+      if (ici) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    marquer();
+    window.addEventListener('hashchange', marquer);
 
     // ---- le menu du téléphone
     const btn = barre.querySelector('.menu-btn');
@@ -62,8 +74,15 @@
         montrer(boutons[(i + k + boutons.length) % boutons.length], true);
       });
     });
-    const voulu = location.hash && zone.querySelector(`[aria-controls="${location.hash.slice(1)}"]`);
-    if (boutons[0]) montrer(voulu || boutons[0]);
+    const cherche = () => location.hash && zone.querySelector(`[aria-controls="${CSS.escape(decodeURIComponent(location.hash.slice(1)))}"]`);
+    if (boutons[0]) montrer(cherche() || boutons[0]);
+    // déjà sur la page, un lien du menu change l'ancre (/metiers#juridique) : on ouvre le bon panneau et on y descend (note 20)
+    window.addEventListener('hashchange', () => {
+      const b = cherche();
+      if (!b) return;
+      montrer(b);
+      zone.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
 
   // ---- les exemples posés dans la page : le sommaire ouvert sur grand écran, « Lire tout l'exemple » déplie
