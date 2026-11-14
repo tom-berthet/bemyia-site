@@ -214,7 +214,8 @@ a.carte-i:hover{transform:translateY(-2px);box-shadow:var(--ombre)}
 .tuiles{display:grid;gap:10px}
 .tuiles.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .tuiles.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.tuiles a{position:relative;display:flex;gap:12px;align-items:center;padding:14px 34px 14px 14px;border-radius:var(--r);background:var(--gris);transition:background .2s,transform .2s var(--ease)}
+.tuiles li{display:flex}
+.tuiles a{flex:1;position:relative;display:flex;gap:12px;align-items:center;padding:14px 34px 14px 14px;border-radius:var(--r);background:var(--gris);transition:background .2s,transform .2s var(--ease)}
 .panneau .tuiles a{background:#fff}
 .tuiles a:hover{transform:translateY(-1px);background:var(--gris2)}
 .tuiles .obj{width:42px;flex:none}
@@ -336,6 +337,10 @@ a.carte-i:hover{transform:translateY(-2px);box-shadow:var(--ombre)}
 .pied .marque .logo{display:inline-flex;color:#fff}
 .pied .marque .logo svg{height:28px;width:auto}
 .pied .marque p{flex:1;min-width:260px;max-width:34em;font-size:15px;line-height:1.55;color:#C9C9D1}
+.pied .marque .pied-ph{flex:0 1 auto;min-width:0;text-align:right}   /* note 26 : une phrase claire plutôt qu'une liste (elle peut rétrécir : sinon, elle élargissait la page sur téléphone) */
+.pied-ph b{display:block;font-size:17px;letter-spacing:-.025em;color:#fff}
+.pied-ph span{display:block;margin-top:4px;font-size:14.5px;color:#A1A1A6}
+@media (max-width:700px){.pied .marque .pied-ph{flex:1 1 100%;text-align:left}}
 .pied .marque .boutons{margin-top:0}
 .pied .cols{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px}
 .pied h3{font-size:13px;font-weight:700;color:#fff;margin:0 0 14px;letter-spacing:.01em}
@@ -743,7 +748,6 @@ main > .fin:last-child + * {margin-top:0}
   .ha-c{padding-top:112px}
   .ha .boutons{flex-direction:column;align-items:center;width:100%;max-width:420px}
   .ha .boutons .btn.noir,.ha .boutons .btn.blanc{width:100%;justify-content:center}
-  .ha .notes{flex-direction:column;align-items:center;gap:6px}
   .ha-rail{animation:none}
   .ha-defile{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-mask-image:none;mask-image:none;padding:12px var(--cote) 22px;scrollbar-width:none}
   .ha-defile::-webkit-scrollbar{display:none}
@@ -768,6 +772,8 @@ main > .fin:last-child + * {margin-top:0}
 #preuves .stats{margin-top:34px}
 #preuves .stat .obj{width:auto;height:44px;max-width:56px;object-fit:contain;object-position:left center}
 .centre-b{justify-content:center}
+
+@media (max-width:600px){.ha .notes{flex-direction:column;align-items:center;gap:6px}}   /* note 26 : plus en escalier sur tablette */
 
 /* ------------------------------------------------------------------ L'accueil v6 (note 24 de Tom, 14/11 nuit)
    Le haut au bleu ciel très doux (celui de la v5 du 13/11), la bande des logos et des chiffres qui défile ; « L'IA prépare » en noir avec
@@ -1029,7 +1035,7 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
 
 /* le téléphone (note 24) : MAX présent dans le haut, les objectifs en lignes compactes, la case de l'agent sans la grande puce */
 @media (max-width:900px){
-  .ha-ciel .ha-max.g{display:block;position:static;order:-1;width:78px;margin:96px auto -84px;filter:drop-shadow(0 14px 18px rgba(0,0,0,.16))}
+  .ha-ciel .ha-max.g{display:block;position:static;order:-1;width:96px;margin:92px auto -82px;transform:none;filter:drop-shadow(0 14px 18px rgba(0,0,0,.16))}
 }
 @media (max-width:700px){
   .ob2-t{flex-direction:row;align-items:center;gap:14px;padding:14px 16px}
@@ -1210,7 +1216,7 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
 /* (note 25 : sans la barre du navigateur ; le bas s'efface et « Voir tout l'exemple » se pose dessus, comme sur la page Analyse) */
 .an-ex{position:relative;max-width:540px;margin:0 auto}
 .an-img{position:relative;display:block;border-radius:24px;overflow:hidden;background:#fff;box-shadow:var(--ombre)}
-.an-img::after{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.82) 58%,#fff 94%)}
+.an-img::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.82) 58%,#fff 94%)}
 .an-img img{display:block;width:100%;height:auto}
 .an-lire{display:flex;justify-content:center;margin-top:-28px;position:relative;z-index:2}
 
@@ -1226,9 +1232,56 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
   .pq-logos{flex-wrap:wrap;gap:10px}
   .pq-logos div{margin-left:0;gap:16px;flex-wrap:wrap}
 }
-/* note 25 : les deux MAX du haut de l'accueil, un peu plus bas */
-.ha-max.g{top:clamp(262px,34vh,360px)}
-.ha-max.d{top:clamp(200px,26vh,290px)}
+/* note 26 : un seul MAX dans le haut de l'accueil, à gauche, plus grand, centré sur le texte (en hauteur) et plus près de lui ;
+   un peu plus d'air entre les boutons et les trois cases ; le titre de la bande en noir */
+.ha-max.g{top:calc(var(--marge) + var(--haut-pad) + 215px);left:max(40px,calc(50% - 660px));width:clamp(150px,15vw,230px);transform:translateY(-50%)}
+.ha .notes{margin-top:34px}
+.bl-t{color:var(--encre)}
+
+/* ------------------------------------------------------------------ note 26 */
+/* « Notre objectif » : des cartes qui se détachent du fond blanc (une ombre douce tout autour, le haut compris) */
+.ob-c{box-shadow:0 1px 2px rgba(0,0,0,.05),0 -3px 12px -6px rgba(0,0,0,.07),0 22px 46px -20px rgba(0,0,0,.22)}
+.ob-c:hover{box-shadow:0 1px 2px rgba(0,0,0,.05),0 -3px 12px -6px rgba(0,0,0,.07),0 30px 60px -24px rgba(0,0,0,.28)}
+/* la méthode : deux boutons au lieu de « Avant tout… » */
+.me-b{margin-top:clamp(28px,3.4vw,40px)}
+/* l'analyse : l'expert qui la relit, et le lien vers « Pourquoi nous » */
+.tom-l{display:inline-flex;align-items:center;gap:5px;margin-left:4px;font-weight:600;color:var(--encre);white-space:nowrap}
+.tom-l .ico{width:14px;height:14px;transition:transform .2s var(--ease)}
+.tom-l:hover .ico{transform:translateX(2px)}
+/* les gains : un exemple par objectif, deux cercles (dehors en rouge : avant ; dedans en bleu : avec l'IA) autour de l'objet */
+.g8-leg{display:flex;justify-content:center;gap:22px;margin-top:26px;font-size:13.5px;font-weight:600;color:#C9C9D1}
+.g8-leg span,.g8-v span{display:inline-flex;align-items:center;gap:8px}
+.g8-leg i,.g8-v i{width:9px;height:9px;border-radius:50%;flex:none}
+.g8-leg .av i,.g8-v.av i{background:linear-gradient(135deg,#F6A193,#E5584B)}
+.g8-leg .ap i,.g8-v.ap i{background:linear-gradient(135deg,#8CC0FF,#3F84F5)}
+.g8{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,40px);max-width:1080px;margin:clamp(30px,4vw,44px) auto 0}
+.g8 li{display:flex;flex-direction:column;align-items:center;text-align:center}
+.g8-c{position:relative;width:168px;height:168px;display:grid;place-items:center}
+.g8-c svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.g8-c .t{fill:none;stroke:rgba(255,255,255,.07);stroke-width:9}
+.g8-c .a{fill:none;stroke-width:9;stroke-linecap:round;stroke-dasharray:var(--p) 100;transition:stroke-dasharray 1.5s var(--ease) .25s}
+.g8-c .a.ap{transition-delay:.7s}
+.js .g8 li:not(.vu) .a{stroke-dasharray:0 100}
+.g8-o{position:relative;width:70px;height:70px;object-fit:contain;filter:drop-shadow(0 16px 20px rgba(0,0,0,.6))}
+.g8-k{margin-top:22px;font-size:13px;font-weight:600;color:#A1A1A6}
+.g8-t{margin-top:4px;font-size:17px;letter-spacing:-.02em;color:#fff;text-wrap:balance}
+.g8-v{display:flex;align-items:baseline;justify-content:space-between;gap:12px;width:100%;max-width:220px;padding:10px 0;font-size:13px;color:#A1A1A6}
+.g8-v.av{margin-top:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+.g8-v.ap b{font-size:26px;line-height:1;font-weight:700;letter-spacing:-.045em;color:#fff;white-space:nowrap}
+.g8-v.av b{font-size:13.5px;font-weight:600;color:#C9C9D1;text-align:right}
+.g8-x{margin-top:10px;max-width:220px;font-size:13.5px;line-height:1.5;color:#A1A1A6}
+@media (prefers-reduced-motion:reduce){.g8-c .a{transition:none}}
+@media (max-width:1020px){.g8{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:44px}}
+@media (max-width:560px){   /* sur téléphone : le cercle à gauche, le texte à droite, un exemple par ligne */
+  .g8{grid-template-columns:minmax(0,1fr);gap:30px}
+  .g8 li{display:grid;grid-template-columns:104px minmax(0,1fr);column-gap:18px;align-items:start;text-align:left}
+  .g8 li > *:not(.g8-c){grid-column:2}
+  .g8-c{grid-column:1;grid-row:1 / span 5;width:104px;height:104px}.g8-o{width:44px;height:44px}
+  .g8-k{margin-top:2px}.g8-t{font-size:16px}
+  .g8-v{max-width:none;padding:8px 0}.g8-v.av{margin-top:8px}.g8-v.ap b{font-size:22px}
+  .g8-x{max-width:none;font-size:13px}
+}
+@media (min-width:561px) and (max-width:1100px){.g8-t{min-height:2.6em}}   /* les lignes « avant / avec l'IA » restent alignées d'une colonne à l'autre */
 
 /* ------------------------------------------------------------------ À propos (outils/pages/apropos.py) : pourquoi, réalisations, espace, questions */
 .ap-profil{max-width:940px;margin:0 auto}
@@ -1411,10 +1464,13 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
 /* sur téléphone, pas de bulle « Besoin d'aide ? » : elle cachait le texte ; le rond reste */
 @media (max-width:560px){.as-bulle{display:none!important}}
 
+/* note 26 : sur tablette aussi, plus de bulle « Besoin d'aide ? » posée sur le contenu (le bouton reste) */
+@media (max-width:1024px){.as-bulle{display:none!important}}
+
 /* La barre se cache quand on descend et revient quand on remonte (note 21 : sur téléphone et tablette ; site.js) */
 @media (max-width:1020px){
-  .barre{transition:transform .32s var(--ease)}
-  .barre.cachee{transform:translate(-50%,calc(-100% - 28px))}
+  .barre{transition:transform .5s cubic-bezier(.22,1,.36,1),opacity .4s ease;will-change:transform}
+  .barre.cachee{transform:translate(-50%,calc(-100% - 28px));opacity:0}
 }
 
 /* ------------------------------------------------------------------ le blog (outils/pages/blog.py) : l'index et les articles */
@@ -1425,11 +1481,10 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
    Note 25 : le contenu reste centré et resserré, à sa largeur maximale (plus de zoom) ; les fonds (hauts de page, panneaux gris ou noirs,
    fin, pied) s'étirent sur toute la largeur, avec leurs 8 px de marge, comme avant : un fond arrêté à 1 600 px laissait des bandes blanches.
    Les visuels des côtés des hauts (MAX, les objets) gardent leur distance au texte : au-delà de 1 440 px, ils suivent le centre, pas le bord. */
-.ha{min-height:min(calc(100svh - var(--marge)),1000px)}
+/* note 26 : un peu moins d'espace entre le haut et le bas du haut de l'accueil, selon la taille de l'écran */
+.ha{min-height:clamp(640px,calc(88svh - var(--marge)),880px)}
 .barre{width:min(1180px,calc(100% - 24px))}
 @media (min-width:1441px){
-  .ha-max.g{left:calc(50% - 662px)}
-  .ha-max.d{right:calc(50% - 662px)}
   .haut .cote.gauche{left:calc(50% - 648px)}
   .haut .cote.droite{right:calc(50% - 648px)}
 }
@@ -1597,6 +1652,9 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
 .som-l b{display:block;font-size:14px;color:var(--encre)}
 .som-l span{display:block;font-size:12.5px;color:var(--doux)}
 @media (max-width:700px){.som{padding-bottom:0}.som-devis{position:relative;right:auto;width:auto;margin-top:10px;transform:none}}
+
+/* note 26 : sur téléphone, le titre du document laisse la place à l'objet posé en haut à droite */
+@media (max-width:700px){.zz-doc .zd-h{padding-right:64px}}
 
 /* ------------------------------------------------------------------ Métiers : /metiers (classes mt-)
    Le choix du métier reprend la mécanique des quinze familles (data-agit) mais se montre autrement : une grille de neuf
@@ -1914,8 +1972,8 @@ a.bt:hover,a.b6:hover,a.bf-f:hover{transform:translateY(-3px);background:linear-
   .ob-4{gap:10px;margin-top:28px}
   .ob-c{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:16px;row-gap:4px;padding:20px}
   .ob-c > *{grid-column:1/-1}
-  .ob-c > .ob-o{grid-column:1;grid-row:1/span 2;height:52px;margin:0;align-self:center;align-items:center;justify-content:center}
-  .ob-o .obj{height:50px;max-width:52px;object-position:center}
+  .ob-c > .ob-o{grid-column:1;grid-row:1/span 2;width:52px;height:52px;margin:0;border-radius:15px;align-self:center}   /* note 26 : la tuile restait large de 76 px et débordait sur le texte */
+  .ob-o .obj{height:38px;max-width:40px;object-position:center}
   .ob-c > h3{grid-column:2;grid-row:1;align-self:end;font-size:20px}
   .ob-c > p:not(.ob-tags){grid-column:2;grid-row:2;align-self:start}
   .ob-c .ob-tags{padding-top:14px}

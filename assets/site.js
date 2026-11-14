@@ -40,16 +40,21 @@
     window.addEventListener('hashchange', marquer);
 
     // ---- sur téléphone et tablette, la barre se cache quand on descend et revient quand on remonte (note 21)
-    let dernierY = scrollY;
+    // (note 26 : « pas smooth ») : un seul calcul par image, et il faut avoir descendu ou remonté un vrai bout (40 px) avant de bouger,
+    // pour que la barre ne tremble plus au moindre geste
+    let dernierY = scrollY, cumul = 0, prevu = false;
     const petitEcran = window.matchMedia('(max-width:1020px)');
-    window.addEventListener('scroll', () => {
-      const y = scrollY;
-      const menuOuvert = barre.querySelector('.menu.ouvert');
-      if (!petitEcran.matches || menuOuvert || y < 120) barre.classList.remove('cachee');
-      else if (y > dernierY + 6) barre.classList.add('cachee');
-      else if (y < dernierY - 6) barre.classList.remove('cachee');
+    const suivre = () => {
+      prevu = false;
+      const y = Math.max(0, scrollY), d = y - dernierY;
       dernierY = y;
-    }, { passive: true });
+      const menuOuvert = barre.querySelector('.menu.ouvert');
+      if (!petitEcran.matches || menuOuvert || y < 120) { cumul = 0; barre.classList.remove('cachee'); return; }
+      cumul = (d > 0) === (cumul > 0) ? cumul + d : d;
+      if (cumul > 40) barre.classList.add('cachee');
+      else if (cumul < -40) barre.classList.remove('cachee');
+    };
+    window.addEventListener('scroll', () => { if (!prevu) { prevu = true; requestAnimationFrame(suivre); } }, { passive: true });
 
     // ---- le menu du téléphone
     const btn = barre.querySelector('.menu-btn');
@@ -130,7 +135,7 @@
   });
 
   // ---- apparition douce (note 24 : « jusque dans les petites animations ») : les titres et les textes, puis les cartes une à une
-  const groupes = '.cartes,.tuiles,.bento-j,.bento-6,.bf-g ul,.bf-d,.stats,.ob2,.me2,.gn,.ob-4,.me4,.sc-valide,.etapes3,.frise,.g6';
+  const groupes = '.cartes,.tuiles,.bento-j,.bento-6,.bf-g ul,.bf-d,.stats,.ob2,.me2,.gn,.ob-4,.me4,.sc-valide,.etapes3,.frise,.g6,.g8';
   document.querySelectorAll('main .entete,main .split-t,main .split-v,main .gc,main .g5,main .metiers-a > div:first-child').forEach(el => {
     if (!el.querySelector(groupes) && !el.closest('[data-r]')) el.setAttribute('data-r', '');
   });
