@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /exemples/
+Disallow: /__
 Sitemap: https://bemyia.fr/sitemap.xml
