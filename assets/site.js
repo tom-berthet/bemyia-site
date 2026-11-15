@@ -135,7 +135,7 @@
   });
 
   // ---- apparition douce (note 24 : « jusque dans les petites animations ») : les titres et les textes, puis les cartes une à une
-  const groupes = '.cartes,.tuiles,.bento-j,.bento-6,.bf-g ul,.bf-d,.stats,.ob2,.me2,.gn,.ob-4,.me4,.sc-valide,.etapes3,.frise,.g6,.g8';
+  const groupes = '.cartes,.tuiles,.bento-j,.bento-6,.bf-g ul,.bf-d,.stats,.ob2,.me2,.gn,.ob-4,.me4,.sc-valide,.etapes3,.frise,.g6,.g8,.gq,.gl ul';
   document.querySelectorAll('main .entete,main .split-t,main .split-v,main .gc,main .g5,main .metiers-a > div:first-child').forEach(el => {
     if (!el.querySelector(groupes) && !el.closest('[data-r]')) el.setAttribute('data-r', '');
   });
