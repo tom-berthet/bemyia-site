@@ -121,8 +121,9 @@
     try {
       const debut = jourParis(new Date());
       const fin = jourParis(new Date(Date.now() + 15 * 864e5));
+      const stop = new AbortController(), delai = setTimeout(() => stop.abort(), 8000);   // Cal.com qui ne répond pas : 8 s au plus
       const r = await fetch(`https://api.cal.com/v2/slots?eventTypeSlug=${encodeURIComponent(ev)}&username=${encodeURIComponent(u)}&start=${debut}&end=${fin}&timeZone=${TZ}`,
-        { headers: { 'cal-api-version': '2024-09-04' } });
+        { headers: { 'cal-api-version': '2024-09-04' }, signal: stop.signal }).finally(() => clearTimeout(delai));
       if (!r.ok) throw new Error(r.status);
       const j = await r.json();
       const jours = Object.entries(j.data || {}).map(([k, v]) => [k, (v || []).map(s => new Date(s.start))]).sort((a, b) => (a[0] < b[0] ? -1 : 1));
@@ -140,7 +141,8 @@
       fil.scrollTop = fil.scrollHeight;
     } catch (e) {
       attente.remove();
-      dire(`Les créneaux ne se chargent pas. <a href="/rendez-vous">Ouvrez la page du rendez-vous</a> pour choisir le vôtre.`);
+      if (e && e.message === 'vide') dire(`Aucun créneau n'est libre dans les deux prochaines semaines. <a href="/rendez-vous">La page du rendez-vous</a> montre les suivants, ou écrivez-nous à <a href="mailto:contact@bemyia.fr">contact@bemyia.fr</a>.`);
+      else dire(`Les créneaux ne se chargent pas. <a href="/rendez-vous">Ouvrez la page du rendez-vous</a> pour choisir le vôtre.`);
     }
   }
 

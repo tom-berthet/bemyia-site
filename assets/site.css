@@ -1684,7 +1684,7 @@ a.ha-avis:hover{transform:translateY(-1px);box-shadow:0 1px 2px rgba(0,0,0,.06),
 /* les titres longs, parfois, sur deux lignes ; sur téléphone, la coupe naturelle */
 @media (max-width:600px){.t-br{display:none}}
 /* le haut : un cadre qui finit sous les pastilles, comme sur les autres pages (le bleu ciel descend vers le gris) */
-.ha.ha-cadre{min-height:calc(100svh - var(--marge) - var(--pj-h,158px));background:linear-gradient(180deg,#D4E5F6 0%,#E4EEF8 40%,var(--gris) 90%)}
+.ha.ha-cadre{min-height:calc(100svh - var(--marge) - var(--pj-h,134px));background:linear-gradient(180deg,#D4E5F6 0%,#E4EEF8 40%,var(--gris) 90%)}
 .ha-cadre .ha-c{padding-bottom:clamp(52px,8vh,96px)}
 .ha-cadre .notes span{background:#fff}
 @media (max-width:900px){.ha.ha-cadre{min-height:0}.ha-cadre .ha-c{padding-bottom:52px}}
@@ -1710,8 +1710,8 @@ a.ha-avis:hover{transform:translateY(-1px);box-shadow:0 1px 2px rgba(0,0,0,.06),
 .pj-chiffres b{font-size:22px;letter-spacing:-.04em;font-weight:700;line-height:1.1}
 .pj-chiffres li a > span:last-child,.pj-fixes li a > span:last-child{font-size:12.5px;line-height:1.35;color:var(--texte2)}
 .pj-pastilles li a{gap:10px;padding:6px 16px 6px 6px;border-radius:999px;white-space:nowrap}
-.pj-pastilles .pj-logo{justify-content:center;width:32px;height:32px;border-radius:50%;background:#fff;flex:none;overflow:hidden}
-.pj-pastilles .pj-logo img,.pj-pastilles .pj-logo svg{max-width:22px;max-height:16px}
+.pj-pastilles .pj-logo{justify-content:center;min-width:32px;height:30px;padding:0 10px;border-radius:999px;background:#fff;flex:none}
+.pj-pastilles .pj-logo img,.pj-pastilles .pj-logo svg{max-width:48px;max-height:15px}
 .pj-pastilles .pj-tx{font-size:13.5px;color:var(--texte2)}
 .pj-pastilles .pj-tx b{color:var(--encre);font-weight:700}
 .pj-grille{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:var(--large);margin:0 auto;padding:0 var(--cote)}
@@ -1751,6 +1751,18 @@ a.ha-avis:hover{transform:translateY(-1px);box-shadow:0 1px 2px rgba(0,0,0,.06),
 .rv-pj .rv-pj-t{margin-bottom:18px;font-size:15px;color:var(--texte2)}
 .rv-pj .rv-pj-t b{color:var(--encre);margin-right:6px}
 .rv-pj .ha.ha-cadre{min-height:0}
+
+/* ===================== note 34 : l'audit du mobile et des formulaires ===================== */
+/* le focus du clavier visible sur les fonds sombres (sections noires, fin, pied) */
+.sec-noire :focus-visible,.fin :focus-visible,.pied :focus-visible,.bf-g :focus-visible,.bf-d :focus-visible{outline-color:#fff}
+/* la page ne défile plus derrière le menu ouvert du téléphone */
+html.menu-ouvert,html.menu-ouvert body{overflow:hidden}
+/* les petites étiquettes de la méthode : 12 px au moins */
+.me-ici,.me-g{font-size:12px}
+@media (max-width:1020px){
+  #menu a{min-height:44px;display:flex;align-items:center}
+  .mt-grille [role="tab"],.agit-liste [role="tab"]{min-height:44px}
+}
 
 /* ------------------------------------------------------------------ À propos (outils/pages/apropos.py) : pourquoi, réalisations, espace, questions */
 .ap-profil{max-width:940px;margin:0 auto}

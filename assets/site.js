@@ -60,12 +60,15 @@
     const btn = barre.querySelector('.menu-btn');
     const menu = document.getElementById('menu');
     if (btn && menu) {
-      btn.addEventListener('click', () => {
-        const ouvert = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!ouvert));
-        menu.classList.toggle('ouvert', !ouvert);
-      });
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { btn.setAttribute('aria-expanded', 'false'); menu.classList.remove('ouvert'); }));
+      const poser = oui => {   // note 34 : Échap et un clic à côté le ferment, et la page ne défile plus derrière lui
+        btn.setAttribute('aria-expanded', String(oui));
+        menu.classList.toggle('ouvert', oui);
+        document.documentElement.classList.toggle('menu-ouvert', oui);
+      };
+      btn.addEventListener('click', () => poser(btn.getAttribute('aria-expanded') !== 'true'));
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => poser(false)));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.classList.contains('ouvert')) { poser(false); btn.focus(); } });
+      document.addEventListener('click', e => { if (menu.classList.contains('ouvert') && !menu.contains(e.target) && !btn.contains(e.target)) poser(false); });
     }
   }
 
