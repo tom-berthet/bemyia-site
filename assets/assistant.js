@@ -1,4 +1,4 @@
-// L'assistant du site (note 20 et 21 de Tom) : MAX en bas à droite. Sans IA pour l'instant : trois boutons (réserver un appel,
+// L'assistant du site (note 20 et 21 de Tom) : en bas à droite, un casque (note 37 : plus MAX). Sans IA pour l'instant : trois boutons (réserver un appel,
 // trouver une réponse, demander mon analyse), les trois prochains créneaux de Cal.com, et une recherche dans les questions du site
 // (assets/assistant.json, fabriqué par outils/site.py). Une bulle « Besoin d'aide ? » une seule fois par visite, après un peu de lecture.
 // Aucun cookie ; rien n'est envoyé nulle part, sauf la lecture des créneaux publics de Cal.com.
@@ -84,7 +84,7 @@
   }
   const menu = () => choix([['visio', 'Réserver un appel', rdv], ['loupe', 'Trouver une réponse', reponse], ['document', 'Demander mon analyse', analyse]]);
   function accueil() {
-    dire('Bonjour, je suis MAX. Je peux vous aider à :');
+    dire('Bonjour ! Je peux vous aider à :');
     menu();
   }
 

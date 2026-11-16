@@ -1781,6 +1781,26 @@ html.menu-ouvert .as{visibility:hidden}
 @media (max-width:640px){.an-lire{flex-direction:column;align-items:center}}
 .etapes3 .lien-t{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 
+/* note 37 : le haut de l'accueil comme les autres pages (MAX à son bureau à gauche, un immeuble de bureaux à droite, à la même hauteur) ;
+   « Notre objectif » en icônes pleines ; dans « Au quotidien », une photo de personnes au travail à la place de « Ce qui vous attend » */
+/* (16/11, Tom : « baisse légèrement le MAX et l'icône comme sur les autres ») : MAX un peu sous le milieu du texte, l'objet à peine plus haut, comme sur les autres pages */
+@media (min-width:901px){
+  .ha-cadre .ha-max.g{top:57%;width:clamp(150px,14vw,230px)}
+  .ha-cadre .ha-max.d{top:56%;right:max(40px,calc(50% - 660px));left:auto;width:clamp(104px,10vw,160px);transform:translateY(-50%)}
+}
+/* sur téléphone et tablette, MAX sous le contenu, centré, comme les autres hauts de page (zz-mobile.css, « .haut .cote.gauche ») */
+@media (max-width:900px){
+  .ha-cadre.ha-ciel .ha-max.g{order:2;width:auto;height:clamp(150px,22vw,196px);max-width:240px;margin:-6px auto 0;align-self:center;transform:none}
+  .ha-cadre .ha-c{padding-bottom:30px}
+}
+@media (max-width:600px){.ha-cadre .ha-c{padding-top:38px}}   /* le surtitre à la même distance de la barre que sur les autres pages (MAX n'est plus au-dessus) */
+.ob-o.ob-ico{width:56px;height:56px;border-radius:16px;margin-bottom:14px;color:var(--encre)}
+.ob-o.ob-ico .ico{width:28px;height:28px}
+.b7 .o37{position:relative;padding:0;margin:0;overflow:hidden;background:#1A1B1F;min-height:320px}
+.b7 .o37 .o37-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+@media (max-width:1020px){.b7 .o37{min-height:0;aspect-ratio:4/3}}
+@media (max-width:640px){.b7 .o37{aspect-ratio:4/5}}
+
 /* ------------------------------------------------------------------ À propos (outils/pages/apropos.py) : pourquoi, réalisations, espace, questions */
 .ap-profil{max-width:940px;margin:0 auto}
 .ap-profil .logos img[src*="logo-resto"]{max-height:42px}
@@ -1964,6 +1984,12 @@ html.menu-ouvert .as{visibility:hidden}
 
 /* note 26 : sur tablette aussi, plus de bulle « Besoin d'aide ? » posée sur le contenu (le bouton reste) */
 @media (max-width:1024px){.as-bulle{display:none!important}}
+/* note 37 : un casque blanc sur le rond noir, à la place des yeux de MAX */
+.as-casque{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#0B0B0C;color:#fff}
+.as-bt .as-casque .ico{width:26px;height:26px}
+.as-av .as-casque{width:42px;height:42px}
+.as-av .as-casque .ico{width:20px;height:20px}
+.as-h .as-casque{display:grid;color:#fff;font-size:inherit;line-height:1}   /* « .as-h span » (le sous-titre) ne s'applique pas au rond */
 
 /* La barre se cache quand on descend et revient quand on remonte (note 21 : sur téléphone et tablette ; site.js) */
 @media (max-width:1020px){
