@@ -130,7 +130,7 @@
       const cr = choisir(jours);
       attente.remove();
       if (!cr.length) throw new Error('vide');
-      dire('Voici les trois prochains créneaux, 20 minutes gratuites en visio avec un expert :');
+      dire('Voici les trois prochains créneaux, 20 minutes gratuites en visio avec votre expert :');
       const d = document.createElement('div');
       d.className = 'as-cr';
       d.innerHTML = cr.map(x => {
