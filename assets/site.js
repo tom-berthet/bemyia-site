@@ -1,4 +1,4 @@
-// Le site de BeMyIA v5 : les menus de la barre (au survol, au clic, se ferment quand la souris sort), le menu du téléphone,
+// Le site de Bemyia v5 : les menus de la barre (au survol, au clic, se ferment quand la souris sort), le menu du téléphone,
 // les quinze familles (on clique), l'apparition douce, la vidéo. Copié tel quel par outils/site.py. Rien n'est envoyé nulle part.
 (() => {
   const root = document.documentElement;
