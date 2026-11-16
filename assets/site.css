@@ -1774,6 +1774,9 @@ html.menu-ouvert .as{visibility:hidden}
 #apercu{padding-top:8px}
 .es-grande{max-width:1120px;margin:0 auto}
 .es-jamais{max-width:620px;margin:22px auto 0;font-size:14px;line-height:1.5;color:var(--texte2)}
+/* 16/11 : « Votre compte » (la double authentification) entre l'en-tête de la sécurité et ses six cartes */
+.es-compte{margin:8px 0 56px}
+@media (max-width:640px){.es-compte{margin:0 0 40px}.es-compte .capture{display:none}}   /* aucune capture téléphone de ce réglage : le texte suffit */
 .an-lire{gap:10px;flex-wrap:wrap}
 @media (max-width:640px){.an-lire{flex-direction:column;align-items:center}}
 .etapes3 .lien-t{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
