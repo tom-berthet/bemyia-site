@@ -667,6 +667,10 @@ main > .fin:last-child + * {margin-top:0}
 .carte-i:has(> .obj) > .k{position:absolute;top:22px;right:22px;margin:0;max-width:55%;text-align:right}
 .carte-i.noire > .k{background:rgba(255,255,255,.12);color:#fff}
 
+/* note 41 (16/11) : la mention « Générée par IA », en tout petit, en bas à droite de la photo d'équipe */
+.o37{position:relative}
+.o37-ia{position:absolute;right:12px;bottom:10px;font-size:10.5px;line-height:1;letter-spacing:.01em;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none}
+
 /* ------------------------------------------------------------------ L'accueil (note 21) : « Notre objectif », la fin « Le travail change » */
 .ob-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:36px}
 .ob-c{padding:24px 22px 22px;border-radius:var(--r-carte);background:#fff;box-shadow:var(--ombre);display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--encre);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}

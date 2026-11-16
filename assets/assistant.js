@@ -160,7 +160,8 @@
                 delai: 'delai', delais: 'delai', duree: 'delai', temps: 'temps', rgpd: 'donnees', confidentialite: 'donnees', securite: 'donnees',
                 salaries: 'salaries', employes: 'salaries', equipe: 'equipes', equipes: 'equipes', chatgpt: 'claude', ia: 'ia', intelligence: 'ia' };
   const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
-  const mots = s => norm(s).split(/[^a-z0-9]+/).filter(m => m.length > 1 && !VIDES.has(m)).map(m => SYN[m] || m);
+  // « combien de temps » parle de durée, pas de prix (16/11, relevé par la vérification du site)
+  const mots = s => norm(s).replace(/combien de temps/g, 'duree').split(/[^a-z0-9]+/).filter(m => m.length > 1 && !VIDES.has(m)).map(m => SYN[m] || m);
   function score(qMots, texte, poids) {
     const t = mots(texte);
     let s = 0;
@@ -223,7 +224,8 @@
     champ.value = '';
     dire(esc(v), 'moi');
     const n = norm(v);
-    if (/(rendez|rdv|appel|creneau|disponib|visio)/.test(n)) return rdv();
+    // Les créneaux seulement pour une demande de rendez-vous ; « Comment se passe l'appel ? » reçoit une réponse (16/11)
+    if (/(rendez|rdv|creneau|disponib|reserver|planifier|caler|prendre (un )?appel)/.test(n)) return rdv();
     if (/(mon analyse|analyse gratuite|demande d.analyse|recevoir.*analyse)/.test(n)) return analyse();
     repondre(v);
   });
