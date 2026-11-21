@@ -1,0 +1,121 @@
+<!doctype html><html lang="fr"><head>
+<meta name="robots" content="noindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Outils sur mesure · Lisenval Avocats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>body{margin:0;background:#E9E9EC;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}.page-doc{max-width:980px;margin:0 auto;padding:24px 16px 64px}
+/* Le plan d'implémentation : un document long, à lire (écran et impression). Fond blanc, encre noire, le gris pour le contexte,
+   des cartes blanches à ombre douce. Aucun contour, aucune pastille colorée, aucune lueur ; le risque se lit en texte et en barres noires. */
+:root{--blanc:#FFFFFF;--gris:#F5F5F7;--gris2:#EDEDF0;--encre:#1D1D1F;--texte:#3A3A3C;--doux:#6E6E73;--filet:#E5E5EA;
+  --ombre:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.07);--font:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--gris);color:var(--texte);font-family:var(--font);font-size:16px;line-height:1.6}
+.pl{max-width:1180px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-left,0px)) 80px;display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+@media (min-width:1000px){.pl{grid-template-columns:250px minmax(0,1fr);align-items:start}}
+.pl h1,.pl h2,.pl h3,.pl h4{color:var(--encre);letter-spacing:-.03em;margin:0;text-wrap:balance}
+.pl h1{font-size:clamp(30px,5vw,44px);line-height:1.06}
+.pl h2{font-size:clamp(24px,3.4vw,32px);line-height:1.12}
+.pl h3{font-size:20px;line-height:1.25}
+.pl h4{font-size:15px;line-height:1.3;letter-spacing:-.01em}
+.pl p{margin:0}
+.pl b,.pl strong{color:var(--encre)}
+.pl a{color:var(--encre)}
+/* le sommaire */
+.som{background:var(--blanc);border-radius:20px;box-shadow:var(--ombre);padding:18px 18px 14px}
+@media (min-width:1000px){.som{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}}
+.som b{display:block;font-size:14px;margin-bottom:8px}
+.som ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
+.som a{display:block;text-decoration:none;font-size:14px;color:var(--texte);padding:5px 8px;border-radius:10px}
+.som a:hover{background:var(--gris)}
+.som a:focus-visible{outline:2px solid #3987E5;outline-offset:1px}
+.som .s2 a{padding-left:20px;font-size:13.5px;color:var(--doux)}
+.corps{display:flex;flex-direction:column;gap:28px;min-width:0}
+/* les blocs */
+.bl{background:var(--blanc);border-radius:24px;box-shadow:var(--ombre);padding:clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:18px;min-width:0;scroll-margin-top:16px}
+.bl.noir{background:#0B0B0C;color:#D1D1D6}
+.bl.noir h1,.bl.noir h2,.bl.noir b,.bl.noir strong{color:#FFFFFF}
+.bl .sous{color:var(--doux);font-size:15px;max-width:76ch}
+.bl.noir .sous{color:#AEAEB2}
+.couv{gap:22px}
+.couv .meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:#AEAEB2}
+.couv .chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.couv .chiffres div{background:#1C1C1E;border-radius:16px;padding:14px 16px}
+.couv .chiffres strong{display:block;font-size:24px;letter-spacing:-.03em;line-height:1.15}
+.couv .chiffres span{font-size:13.5px;color:#AEAEB2}
+.lead{font-size:17px;max-width:72ch}
+ul.l,ol.l{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.grille2{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:720px){.grille2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.carte{background:var(--gris);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.carte p{font-size:15px}
+/* les tableaux */
+.tb{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;background:var(--gris)}
+.tb table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:620px}
+.tb th{text-align:left;font-size:12.5px;font-weight:600;color:var(--doux);padding:10px 12px;letter-spacing:.01em;vertical-align:bottom}
+.tb td{padding:10px 12px;vertical-align:top;border-top:1px solid var(--filet)}
+.tb td b{display:block}
+.tb td span.d{display:block;font-size:13px;color:var(--doux)}
+.tb .num{white-space:nowrap;text-align:right}
+.tb tr.tot td{font-weight:600;color:var(--encre)}
+/* l'échelle des risques */
+.rq{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:var(--encre);white-space:nowrap}
+.rq i{display:inline-flex;gap:3px}
+.rq i::before,.rq i::after,.rq i span{content:"";display:block;width:14px;height:6px;border-radius:3px;background:var(--gris2)}
+.rq.n1 i::before,.rq.n2 i::before,.rq.n2 i span,.rq.n3 i::before,.rq.n3 i span,.rq.n3 i::after{background:var(--encre)}
+.niveaux{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:860px){.niveaux{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* un chantier, ses tâches */
+.ch-tete{display:flex;gap:18px;align-items:flex-start}
+.ch-tete .o3d{width:76px;height:76px;flex:none;background-size:contain;background-repeat:no-repeat;background-position:center}
+.ch-tete .n{font-size:14px;color:var(--doux);font-weight:600}
+.ch-res{font-size:16px;color:var(--encre);max-width:72ch}
+.tk{background:var(--gris);border-radius:20px;padding:clamp(16px,3vw,24px);display:flex;flex-direction:column;gap:14px;min-width:0;scroll-margin-top:16px}
+.tk-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:flex-start}
+.tk-h h3{font-size:19px;max-width:60ch}
+.tk-h .id{font-size:13.5px;font-weight:700;color:var(--doux);display:block;margin-bottom:4px}
+.tk-etiq{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:13.5px;color:var(--doux)}
+.tk-etiq .st{color:var(--encre);font-weight:600}
+.av-ap{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+@media (min-width:760px){.av-ap{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.av-ap div{background:var(--blanc);border-radius:14px;padding:12px 14px;font-size:15px}
+.av-ap b{display:block;font-size:13px;color:var(--doux);font-weight:600;margin-bottom:2px}
+.champs{display:grid;grid-template-columns:minmax(0,1fr);gap:0;background:var(--blanc);border-radius:14px;overflow:hidden}
+.champs>div{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:10px 14px;border-top:1px solid var(--filet);font-size:14.5px}
+.champs>div:first-child{border-top:0}
+@media (min-width:760px){.champs>div{grid-template-columns:200px minmax(0,1fr);gap:16px}}
+.champs dt,.champs .k{font-weight:600;color:var(--encre);font-size:13.5px}
+.champs ol,.champs ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.champs .risque-l{display:flex;flex-direction:column;gap:4px}
+.renvoi{font-size:14px;color:var(--doux)}
+.cle{font-size:13px;color:var(--doux)}
+.pied{font-size:13px;color:var(--doux);text-align:center;max-width:70ch;margin:0 auto}
+@media print{
+  body{background:#fff}.pl{display:block;padding:0}.som{display:none}
+  .bl{box-shadow:none;border-radius:0;padding:12mm 0;break-inside:auto}.bl.ch{break-before:page}
+  .tk{break-inside:avoid;background:#fff}.tb{overflow:visible}.tb table{min-width:0}
+}
+.pl .logo{height:24px;width:auto;display:block;color:var(--encre)}
+.bl.noir .logo{color:#FFFFFF}
+.som a.actif{background:var(--gris2);color:var(--encre);font-weight:600}
+.som .s2 a.actif{color:var(--encre)}
+.pl.seul{grid-template-columns:minmax(0,1fr)!important;max-width:900px}
+</style></head><body><div class="pl seul"><main class="corps"><section class="bl noir couv"><div><svg class="logo" role="img" aria-label="Bemyia" xmlns="http://www.w3.org/2000/svg" viewBox="48 41 1271 386">
+  
+  <g fill="currentColor" fill-rule="evenodd">
+    <path d="M54 46H105Q110 46 110 51V146C127 132 148 124 172 124C229 124 275 171 275 231C275 293 227 340 162 340C96 340 49 301 49 235V51Q49 46 54 46ZM162 180C133.3 180 110 202.8 110 231C110 259.2 133.3 282 162 282C190.7 282 214 259.2 214 231C214 202.8 190.7 180 162 180Z"/>
+    <path d="M389 126C450 126 495 174 495 233V244Q495 249 490 249H343C350 273 367 290 390 290C409 290 421 282 433 268Q436 264 441 266L484 281Q489 283 486 288C465 323 430 340 390 340C330 340 281 292 281 234C281 174 329 126 389 126ZM389 176C367 176 352 190 344 210H434C427 190 411 176 389 176Z"/>
+    <path d="M508 333Q503 333 503 328V219C503 169 542 129 591 129C614 129 636 139 652 154C669 139 692 129 716 129C765 129 804 169 804 219V283C804 336 831 368 875 368C912 368 939 344 949 303C935 316 917 323 897 323C849 323 817 292 817 241V162C817 146 829 137 847.5 137C866 137 878 146 878 162V231C878 251 893 265 914 265C935 265 950 251 950 231V162C950 146 962 137 980.5 137C999 137 1011 146 1011 162V282C1011 361 963 426 875 426C796 426 743 369 743 286V220C743 203.4 729.6 190 712.5 190C695.4 190 682 203.4 682 220V328Q682 333 677 333H626Q621 333 621 328V220C621 203.4 608 190 591.5 190C575 190 562 203.4 562 220V328Q562 333 557 333Z"/>
+    <path d="M1054 42A35 35 0 1 1 1054 112A35 35 0 1 1 1054 42ZM1033 134H1075Q1083 134 1083 142V325Q1083 333 1075 333H1033Q1025 333 1025 325V142Q1025 134 1033 134Z"/>
+    <path d="M1196 125C1220 125 1243 134 1259 149V135Q1259 129 1265 129H1312Q1318 129 1318 135V327Q1318 333 1312 333H1265Q1259 333 1259 327V312C1243 328 1220 338 1196 338C1138 338 1092 290 1092 232C1092 173 1138 125 1196 125ZM1201 180C1173.4 180 1151 203.1 1151 231.5C1151 259.9 1173.4 283 1201 283C1228.6 283 1251 259.9 1251 231.5C1251 203.1 1228.6 180 1201 180Z"/>
+  </g>
+</svg></div><h1>Des outils sur mesure · Lisenval Avocats</h1>
+    <p class="lead">L'audit et le plan d'implémentation mettent l'IA dans vos tâches, avec vos outils. Ce document, à part, montre quelques outils qu'on pourrait construire pour vous, avec l'IA dedans. Ils ne font partie ni de l'audit, ni de l'implémentation : s'ils vous intéressent, ils font l'objet d'un projet à part, après l'implémentation.</p>
+    <div class="meta"><span>À part de l'audit</span><span>Exemple fictif</span></div></section>
+    <section class="bl"><h2>Quelques outils pour vous</h2><article class="tk"><div class="tk-h"><div><span class="id">Outil 1</span><h3>L&#x27;espace client du cabinet</h3></div></div>
+    <div class="av-ap"><div><b>Aujourd'hui</b>Les clients envoient leurs pièces par email, en plusieurs fois, et appellent pour savoir où en est leur dossier.</div><div><b>L'outil</b>Un espace en ligne à votre nom : le client dépose ses pièces, voit celles qui manquent, l&#x27;état de son dossier et la prochaine étape, et pose ses questions pratiques.</div></div>
+    <div class="champs"><div><span class="k">Où est l&#x27;IA</span><div>L&#x27;IA range chaque pièce déposée, dit ce qui manque et répond aux questions pratiques depuis la base validée ; une question de fond part à l&#x27;avocat.</div></div><div><span class="k">L&#x27;impact estimé</span><div>Moins d&#x27;appels au secrétariat et des dossiers complets plus tôt : un ordre de grandeur à mesurer sur vos appels et vos relances.</div></div><div><span class="k">Ce qu&#x27;il faut</span><div>La règle du secret (V1), l&#x27;accès au logiciel de gestion (V2), un hébergement à votre nom, en France ou en Europe.</div></div></div></article><article class="tk"><div class="tk-h"><div><span class="id">Outil 2</span><h3>L&#x27;estimation du budget d&#x27;un nouveau dossier</h3></div></div>
+    <div class="av-ap"><div><b>Aujourd'hui</b>Le budget d&#x27;honoraires d&#x27;un dossier se fixe à l&#x27;expérience ; les dépassements se découvrent à la fin.</div><div><b>L'outil</b>Un outil qui propose le budget d&#x27;un nouveau dossier depuis les dossiers semblables du cabinet : le temps par étape, les écarts habituels, les risques de dépassement.</div></div>
+    <div class="champs"><div><span class="k">Où est l&#x27;IA</span><div>L&#x27;IA trouve les dossiers semblables et explique son estimation ; l&#x27;associé décide.</div></div><div><span class="k">L&#x27;impact estimé</span><div>Des honoraires fixes mieux calés et moins de dépassements, au-delà de ce que compte l&#x27;audit : à mesurer après un an.</div></div><div><span class="k">Ce qu&#x27;il faut</span><div>Trois ans d&#x27;exports du temps et des notes (T0.4), le suivi des dossiers à honoraires fixes (T6.3).</div></div></div></article><article class="tk"><div class="tk-h"><div><span class="id">Outil 3</span><h3>L&#x27;approbation des comptes en série</h3></div></div>
+    <div class="av-ap"><div><b>Aujourd'hui</b>180 approbations de mars à juin, chacune préparée depuis celle de l&#x27;an dernier.</div><div><b>L'outil</b>Un outil pour le pôle des sociétés : les comptes de chaque société reçus, le dossier d&#x27;approbation complet préparé, le calendrier et les signatures suivis, le dépôt préparé.</div></div>
+    <div class="champs"><div><span class="k">Où est l&#x27;IA</span><div>L&#x27;IA lit les comptes et les statuts, prépare chaque document et signale ce qui change depuis l&#x27;an dernier ; la juriste valide.</div></div><div><span class="k">L&#x27;impact estimé</span><div>Le pic du printemps absorbé avec la même équipe, et de nouvelles sociétés suivies : à mesurer au premier printemps.</div></div><div><span class="k">Ce qu&#x27;il faut</span><div>La tâche T2.2 en service depuis un printemps, vos modèles par forme de société, un hébergement à votre nom.</div></div></div></article></section>
+    <section class="bl"><h2>Comment ça se passe</h2><ul class="l"><li>Chaque outil est construit pour vous, hébergé à votre nom ; le code vous appartient.</li><li>On commence par le plus utile, après l'implémentation, quand vos équipes ont pris l'habitude de l'IA.</li><li>Les impacts sont des estimations ; on les mesure sur vos chiffres avant de décider.</li></ul></section>
+    <p class="pied">Exemple fictif : Lisenval Avocats n'existe pas.</p></main></div></body></html>

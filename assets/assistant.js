@@ -212,7 +212,7 @@
 
   // ---- 3. demander mon analyse
   function analyse() {
-    dire('Votre analyse gratuite : un premier avis sur votre entreprise, ce que l’IA pourrait vous rendre et quatre pistes, sous 48 heures ouvrées. Seul votre email est demandé.');
+    dire('Votre analyse gratuite : un premier ordre de grandeur de ce que l’IA pourrait changer dans votre entreprise, en heures et en euros, et ce qu’on y implémenterait, sous 48 heures ouvrées. Seul votre email est demandé.');
     dire(`<a class="as-btn" href="${lienAnalyse}">Recevoir mon analyse${fleche}</a><a class="as-lien" href="/analyse#exemple">Voir un exemple</a>`, 'bot nu');
   }
 

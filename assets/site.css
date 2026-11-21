@@ -670,6 +670,9 @@ main > .fin:last-child + * {margin-top:0}
 /* note 41 (16/11) : la mention « Générée par IA », en tout petit, en bas à droite de la photo d'équipe */
 .o37{position:relative}
 .o37-ia{position:absolute;right:12px;bottom:10px;font-size:10.5px;line-height:1;letter-spacing:.01em;color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.55);pointer-events:none}
+/* 21/11 : l'exemple posé par un cadre (doc_cadre) */
+.doc-if{display:block;width:100%;height:1500px;border:0;background:#fff}
+.doc-som .doc-som-o{font-weight:600}
 
 /* ------------------------------------------------------------------ L'accueil (note 21) : « Notre objectif », la fin « Le travail change » */
 .ob-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:36px}
@@ -2081,6 +2084,20 @@ html.menu-ouvert .as{visibility:hidden}
   .haut .cote.gauche{left:calc(50% - 648px)}
   .haut .cote.droite{right:calc(50% - 648px)}
 }
+
+/* Les exemples par secteur (21/11) : des cartes blanches à ombre douce, sans contour ni pastille */
+.ex-grille{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px}
+.ex-carte{display:flex;flex-direction:column;padding:24px 24px 22px;border-radius:var(--r-carte);background:#fff;box-shadow:var(--ombre);color:var(--encre)}
+.ex-carte h3{margin:6px 0 4px;font-size:19px;font-weight:700;letter-spacing:-.01em}
+.ex-carte .ex-sous{margin:0 0 16px;font-size:14px;color:var(--doux)}
+.ex-carte .ex-docs{list-style:none;margin:auto 0 0;padding:6px 0 0;display:grid;gap:9px}
+.ex-carte .ex-docs a{font-size:15px;font-weight:500}
+.ex-ref{grid-column:1/-1;background:var(--noir);color:#fff}
+.ex-ref .k,.ex-ref .ex-sous{color:rgba(255,255,255,.7)}
+.ex-ref .ex-docs{grid-template-columns:repeat(4,max-content);gap:9px 28px}
+.ex-ref h3,.ex-ref .ex-docs a{color:#fff}
+@media (max-width:900px){.ex-grille{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.ex-grille{grid-template-columns:1fr}.ex-ref .ex-docs{grid-template-columns:1fr}}
 
 /* ------------------------------------------------------------------ Gains : /gains (classes ga-)
    Un peu de pêche, seulement pour les chiffres ; le reste en blanc, gris et noir. */
