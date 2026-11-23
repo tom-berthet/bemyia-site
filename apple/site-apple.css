@@ -86,3 +86,23 @@
 /* une bulle d'aide (.terme-def) près du bord droit dépassait de 16 px sur un écran étroit à souris (le site d'avant aussi) :
    la page ne défile plus jamais sur le côté (le corps de page avait déjà overflow-x:clip, qui ne s'applique pas à la fenêtre) */
 html[data-apple="site"]{overflow-x:clip}
+
+/* ------------------------------------------------------------------ Tom, 24/11 : « Les boutons "Réserver un appel" devraient être avec
+   fond blanc ou gris derrière, et pas sans rien » : dans les hauts, le second bouton (Réserver un appel, Voir un exemple…) est une
+   pastille blanche, de la même taille que le bouton noir */
+[data-apple="site"] .ha .boutons .btn.lien,[data-apple="site"] .haut .boutons .btn.lien{
+  background:#fff;padding-left:22px;padding-right:22px;box-shadow:0 1px 2px rgba(0,0,0,.05),0 6px 18px rgba(0,0,0,.06)}
+[data-apple="site"] .ha .boutons .btn.lien:hover,[data-apple="site"] .haut .boutons .btn.lien:hover{opacity:1;background:#F2F2F4}
+
+/* ------------------------------------------------------------------ Méthode au téléphone (Tom, 24/11 : « corriger la page Méthode sur
+   téléphone ») : les six étapes cachaient la porte. L'image (le mur, le sol, la porte) est posée en bas du haut, sous les étapes, et se
+   fond par le haut dans la couleur du mur ; le haut s'allonge juste assez pour que la porte se voie en entier sous les étapes. */
+@media (max-aspect-ratio:3/4){
+  [data-apple="site"] .haut.ap-p-haut-methode{
+    background:radial-gradient(70% 34% at 50% 26%,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 100%),#CCC8C8}
+  .ap-p-haut-methode .ap-fond{top:auto;height:600px;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 32%);mask-image:linear-gradient(to bottom,transparent 0,#000 32%)}
+  .ap-p-haut-methode .ap-fond img{object-position:100% 100%}
+  .ap-p-haut-methode .ap-fond::after{display:none}
+  [data-apple="site"] .haut.ap-p-haut-methode .haut-in{padding-bottom:236px!important}
+}
