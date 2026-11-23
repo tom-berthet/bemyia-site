@@ -1,0 +1,88 @@
+/* La nouvelle direction, posée sur le site de base (retour 8 de Tom, 24/11 : « on change juste quelques détails sur le site de base »).
+   Rien d'autre que : les hauts de page (en plein écran, la même marge tout autour, lisibles), la section des gains de l'accueil.
+   La typographie, les pastilles au-dessus des titres, « Au quotidien », les métiers et les autres sections restent ceux du site. */
+
+/* ------------------------------------------------------------------ les hauts en photo : plein écran, la même marge tout autour */
+[data-apple="site"] .ha.ap-photo,[data-apple="site"] .haut.ap-photo{
+  min-height:calc(100svh - 2 * var(--marge));margin:var(--marge);background:#C9D9EA;overflow:hidden}
+.ap-photo .ap-fond{position:absolute;inset:0;z-index:0;overflow:hidden}
+/* l'image toujours en grand, sans flou ni bande : elle remplit le cadre. Écran courant : le bas reste visible (le rebord,
+   l'ordinateur, la porte, les jumelles, le banc), on rogne dans le ciel. Écran très large : on garde le milieu un peu bas, pour que
+   le texte reste dans le ciel et que le sujet reste en grande partie visible. */
+.ap-photo .ap-fond img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+@media (min-aspect-ratio:17/10){.ap-photo .ap-fond img{object-position:50% 72%}}
+/* lot v6 (retour 13) : les vues ouvertes de l'accueil, de Gains et de Métiers ont leur objet tout en bas : l'image reste calée sur le bas */
+@media (min-aspect-ratio:17/10){.ha.ap-photo .ap-fond img,.ap-p-haut-gains .ap-fond img,.ap-p-haut-metiers .ap-fond img{object-position:50% 100%}}
+/* lisible : derrière le texte, un voile clair très doux qui s'efface vers les bords (aucun flou) */
+.ap-photo .ap-fond::after{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(50% 40% at 50% 34%,rgba(255,255,255,.42) 0%,rgba(255,255,255,0) 100%)}
+.ap-photo .ha-c,.ap-photo .haut-in{position:relative;z-index:1}
+.ap-photo .chapo{color:#2C2C2E}
+.ap-photo .chip.verre,.ap-photo .notes span,.ap-photo .parcours a{background:rgba(255,255,255,.8)!important;-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
+.ap-photo .ha-max{display:none}
+/* Métiers : un voile un peu plus présent derrière le texte */
+.ap-p-haut-metiers .ap-fond::after{background:radial-gradient(54% 44% at 50% 32%,rgba(255,255,255,.6) 0%,rgba(255,255,255,0) 100%)}
+
+/* ------------------------------------------------------------------ tous les hauts : le texte part du même endroit (Tom, 24/11)
+   La pastille au-dessus du titre est à la même hauteur sur toutes les pages : plus de centrage vertical selon la longueur du texte. */
+[data-apple="site"]{--ap-haut:148px}
+[data-apple="site"] .ha .ha-c{justify-content:flex-start!important;padding-top:var(--ap-haut)!important}
+/* le bloc .haut-in est une colonne : le texte part du haut (justify), et reste centré (align), sauf sur les pages à objet */
+[data-apple="site"] .haut .haut-in{justify-content:flex-start!important;align-items:center!important;padding-top:var(--ap-haut)!important}
+[data-apple="site"] .haut.ap-objet .haut-in{align-items:flex-start!important}
+[data-apple="site"] .haut:not(.ap-objet) .haut-c{width:100%}
+[data-apple="site"] .ha .ha-c > :first-child,[data-apple="site"] .haut .haut-c > :first-child{margin-top:0!important}
+
+/* ------------------------------------------------------------------ douze pages : l'objet à droite, le texte à gauche */
+[data-apple="site"] .haut{background:#F5F5F7}
+[data-apple="site"] .haut.ap-objet{background:var(--fond-objet,#EFEFF1)}
+/* comme les pages en photo : la hauteur de l'écran, la même marge tout autour */
+[data-apple="site"] .haut.ap-objet:not(.petit){min-height:calc(100svh - 2 * var(--marge));margin:var(--marge)}
+.ap-objet .haut-c{align-items:flex-start;text-align:left;max-width:min(580px,54%)}
+.ap-objet .haut-c .t1{max-width:none}
+.ap-objet .haut-c .chapo{margin-left:0;margin-right:0}
+.ap-objet .haut-c .boutons,.ap-objet .haut-c .notes,.ap-objet .haut-c .parcours{justify-content:flex-start}
+.ap-objet-haut{position:absolute;z-index:0;top:50%;right:max(8px,calc(50% - 640px));width:clamp(300px,40vw,580px);transform:translateY(-44%);pointer-events:none}
+.ap-objet-haut img{display:block;width:100%;height:auto;
+  -webkit-mask-image:radial-gradient(closest-side,#000 80%,transparent 100%);mask-image:radial-gradient(closest-side,#000 80%,transparent 100%)}
+.ap-objet.petit .ap-objet-haut{width:clamp(240px,30vw,420px)}
+[data-apple="site"] .haut.ap-plat{background:#F5F5F7}
+
+/* ------------------------------------------------------------------ l'accueil : les gains, les quatre cartes d'avant, l'illustration en haut */
+#objectif.ap-gains .ob-c .ob-o.ap-tuile{display:block!important;position:relative;width:auto!important;height:auto!important;aspect-ratio:4 / 3;
+  margin:-10px -8px 12px!important;padding:0!important;border-radius:16px!important;overflow:hidden;background:var(--g,#E5E4E9)!important}
+#objectif.ap-gains .ob-o.ap-tuile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;
+  transition:transform .5s var(--ease)}
+#objectif.ap-gains .ob-c:hover .ob-o.ap-tuile img{transform:scale(1.04)}
+@media (prefers-reduced-motion:reduce){#objectif.ap-gains .ob-o.ap-tuile img{transition:none}}
+
+/* téléphone (écran en hauteur) : l'image recadrée vers la droite, là où sont les objets (l'ordinateur, la porte, les jumelles, le banc) */
+@media (max-aspect-ratio:3/4){.ap-photo .ap-fond img{object-position:84% 100%}}   /* juge du 24/11 : à 74 %, l'ordinateur et le banc étaient coupés à droite */
+@media (max-aspect-ratio:3/4){.ap-p-haut-metiers .ap-fond img{object-position:50% 100%}}   /* la table est au centre de l'image */
+
+@media (max-width:900px){
+  [data-apple="site"]{--ap-haut:118px}
+  [data-apple="site"] .ha.ap-photo{padding-top:0!important}
+  /* l'objet passe sous le texte : la pastille part du même endroit que sur les autres pages */
+  [data-apple="site"] .haut.ap-objet{display:flex;flex-direction:column;min-height:0!important}
+  [data-apple="site"] .haut.ap-objet .haut-in{align-items:center!important}
+  [data-apple="site"] .haut.ap-objet .haut-in{min-height:0!important;padding-bottom:12px!important}
+  [data-apple="site"] .haut.ap-objet .ap-objet-haut{order:2;margin:8px auto 32px!important}
+  .ap-objet .haut-c{align-items:center;text-align:center;max-width:none}
+  .ap-objet .haut-c .boutons,.ap-objet .haut-c .notes,.ap-objet .haut-c .parcours{justify-content:center}
+  .ap-objet .haut-c .chapo{margin-left:auto;margin-right:auto}
+  .ap-objet-haut{position:relative;top:auto;right:auto;transform:none;width:min(240px,58vw);margin:84px auto -28px}
+  .ap-objet .haut-in{padding-top:0!important}
+  #objectif.ap-gains .ob-c .ob-o.ap-tuile{margin:-6px -4px 10px!important}
+  /* le rendez-vous : le choix du créneau reste dans le premier écran (juge du 24/11) ; l'objet n'est montré que sur grand écran */
+  [data-page="rendez-vous"] .ap-objet-haut{display:none}
+}
+/* les gains au téléphone : la carte du site de base passe en ligne (une tuile de 52 px) ; ici l'illustration reste en grand, au-dessus du texte */
+@media (max-width:640px){
+  #objectif.ap-gains .ob-c{display:flex;flex-direction:column}
+  #objectif.ap-gains .ob-c > *{align-self:stretch}
+  #objectif.ap-gains .ob-c > .ob-o.ap-tuile{align-self:stretch;width:auto!important;height:auto!important;margin:-6px -6px 6px!important;border-radius:14px!important}
+}
+
+/* une bulle d'aide (.terme-def) près du bord droit dépassait de 16 px sur un écran étroit à souris (le site d'avant aussi) :
+   la page ne défile plus jamais sur le côté (le corps de page avait déjà overflow-x:clip, qui ne s'applique pas à la fenêtre) */
+html[data-apple="site"]{overflow-x:clip}
