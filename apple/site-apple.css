@@ -106,3 +106,49 @@ html[data-apple="site"]{overflow-x:clip}
   .ap-p-haut-methode .ap-fond::after{display:none}
   [data-apple="site"] .haut.ap-p-haut-methode .haut-in{padding-bottom:236px!important}
 }
+
+/* ------------------------------------------------------------------ le « trou » (retour 18 de Tom, 24/11 : « R et texte blanc »)
+   Les six hauts en photo (le noir des bords à 78 % depuis le retour 20 : « légèrement moins noir ») : comme si on regardait la simulation par un trou. L'image un peu assombrie, du noir pur sur les quatre bords
+   qui se fond vers le centre (jamais au milieu : des largeurs bornées), le titre et le sous-titre en blanc avec une ombre douce.
+   Au téléphone, des bandes plus étroites (le texte y prend presque toute la largeur). Choisi dans bemyia/sources-apple/essais/hauts.html. */
+.ap-photo .ap-fond img{filter:brightness(.62)}
+/* le blanc du texte doit ressortir partout (mesuré : un contraste d'au moins 4,5 derrière le texte) : les murs clairs un peu plus sombres */
+.ap-p-haut-outils .ap-fond img,.ap-p-haut-metiers .ap-fond img{filter:brightness(.58)}
+.ap-p-haut-methode .ap-fond img{filter:brightness(.55)}
+.ap-photo .ap-fond::after,.ap-p-haut-metiers .ap-fond::after{background:
+    linear-gradient(90deg,rgba(0,0,0,0.78) 0,rgba(0,0,0,0.78) calc(0px + clamp(160px, 22vw, 460px) * 0),rgba(0,0,0,0.702) calc(0px + clamp(160px, 22vw, 460px) * 0.12),rgba(0,0,0,0.53) calc(0px + clamp(160px, 22vw, 460px) * 0.3),rgba(0,0,0,0.328) calc(0px + clamp(160px, 22vw, 460px) * 0.5),rgba(0,0,0,0.14) calc(0px + clamp(160px, 22vw, 460px) * 0.72),rgba(0,0,0,0.039) calc(0px + clamp(160px, 22vw, 460px) * 0.88),rgba(0,0,0,0.0) calc(0px + clamp(160px, 22vw, 460px) * 1),rgba(0,0,0,0.0) calc(100% - 0px - clamp(160px, 22vw, 460px) * 1),rgba(0,0,0,0.039) calc(100% - 0px - clamp(160px, 22vw, 460px) * 0.88),rgba(0,0,0,0.14) calc(100% - 0px - clamp(160px, 22vw, 460px) * 0.72),rgba(0,0,0,0.328) calc(100% - 0px - clamp(160px, 22vw, 460px) * 0.5),rgba(0,0,0,0.53) calc(100% - 0px - clamp(160px, 22vw, 460px) * 0.3),rgba(0,0,0,0.702) calc(100% - 0px - clamp(160px, 22vw, 460px) * 0.12),rgba(0,0,0,0.78) calc(100% - 0px - clamp(160px, 22vw, 460px) * 0),rgba(0,0,0,0.78) 100%),
+    linear-gradient(180deg,rgba(0,0,0,0.78) 0,rgba(0,0,0,0.78) calc(0px + clamp(110px, 18vh, 240px) * 0),rgba(0,0,0,0.702) calc(0px + clamp(110px, 18vh, 240px) * 0.12),rgba(0,0,0,0.53) calc(0px + clamp(110px, 18vh, 240px) * 0.3),rgba(0,0,0,0.328) calc(0px + clamp(110px, 18vh, 240px) * 0.5),rgba(0,0,0,0.14) calc(0px + clamp(110px, 18vh, 240px) * 0.72),rgba(0,0,0,0.039) calc(0px + clamp(110px, 18vh, 240px) * 0.88),rgba(0,0,0,0.0) calc(0px + clamp(110px, 18vh, 240px) * 1),rgba(0,0,0,0.0) calc(100% - 0px - clamp(110px, 18vh, 240px) * 1),rgba(0,0,0,0.039) calc(100% - 0px - clamp(110px, 18vh, 240px) * 0.88),rgba(0,0,0,0.14) calc(100% - 0px - clamp(110px, 18vh, 240px) * 0.72),rgba(0,0,0,0.328) calc(100% - 0px - clamp(110px, 18vh, 240px) * 0.5),rgba(0,0,0,0.53) calc(100% - 0px - clamp(110px, 18vh, 240px) * 0.3),rgba(0,0,0,0.702) calc(100% - 0px - clamp(110px, 18vh, 240px) * 0.12),rgba(0,0,0,0.78) calc(100% - 0px - clamp(110px, 18vh, 240px) * 0),rgba(0,0,0,0.78) 100%)!important}
+@media (max-width:700px){
+  .ap-photo .ap-fond::after,.ap-p-haut-metiers .ap-fond::after{background:
+    linear-gradient(90deg,rgba(0,0,0,0.78) 0,rgba(0,0,0,0.78) calc(0px + 64px * 0),rgba(0,0,0,0.702) calc(0px + 64px * 0.12),rgba(0,0,0,0.53) calc(0px + 64px * 0.3),rgba(0,0,0,0.328) calc(0px + 64px * 0.5),rgba(0,0,0,0.14) calc(0px + 64px * 0.72),rgba(0,0,0,0.039) calc(0px + 64px * 0.88),rgba(0,0,0,0.0) calc(0px + 64px * 1),rgba(0,0,0,0.0) calc(100% - 0px - 64px * 1),rgba(0,0,0,0.039) calc(100% - 0px - 64px * 0.88),rgba(0,0,0,0.14) calc(100% - 0px - 64px * 0.72),rgba(0,0,0,0.328) calc(100% - 0px - 64px * 0.5),rgba(0,0,0,0.53) calc(100% - 0px - 64px * 0.3),rgba(0,0,0,0.702) calc(100% - 0px - 64px * 0.12),rgba(0,0,0,0.78) calc(100% - 0px - 64px * 0),rgba(0,0,0,0.78) 100%),
+    linear-gradient(180deg,rgba(0,0,0,0.78) 0,rgba(0,0,0,0.78) calc(0px + 90px * 0),rgba(0,0,0,0.702) calc(0px + 90px * 0.12),rgba(0,0,0,0.53) calc(0px + 90px * 0.3),rgba(0,0,0,0.328) calc(0px + 90px * 0.5),rgba(0,0,0,0.14) calc(0px + 90px * 0.72),rgba(0,0,0,0.039) calc(0px + 90px * 0.88),rgba(0,0,0,0.0) calc(0px + 90px * 1),rgba(0,0,0,0.0) calc(100% - 0px - 90px * 1),rgba(0,0,0,0.039) calc(100% - 0px - 90px * 0.88),rgba(0,0,0,0.14) calc(100% - 0px - 90px * 0.72),rgba(0,0,0,0.328) calc(100% - 0px - 90px * 0.5),rgba(0,0,0,0.53) calc(100% - 0px - 90px * 0.3),rgba(0,0,0,0.702) calc(100% - 0px - 90px * 0.12),rgba(0,0,0,0.78) calc(100% - 0px - 90px * 0),rgba(0,0,0,0.78) 100%)!important}
+}
+[data-apple="site"] .ap-photo h1,[data-apple="site"] .ap-photo .chapo{color:#fff!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.22),0 2px 24px rgba(0,0,0,.35)}
+/* Méthode au téléphone : l'image posée sous les étapes se fond dans le mur ; le fond du haut prend la couleur du mur assombri */
+@media (max-aspect-ratio:3/4){
+  [data-apple="site"] .haut.ap-p-haut-methode{background:linear-gradient(90deg,rgba(0,0,0,0.78) 0,rgba(0,0,0,0.78) calc(0px + 64px * 0),rgba(0,0,0,0.702) calc(0px + 64px * 0.12),rgba(0,0,0,0.53) calc(0px + 64px * 0.3),rgba(0,0,0,0.328) calc(0px + 64px * 0.5),rgba(0,0,0,0.14) calc(0px + 64px * 0.72),rgba(0,0,0,0.039) calc(0px + 64px * 0.88),rgba(0,0,0,0.0) calc(0px + 64px * 1),rgba(0,0,0,0.0) calc(100% - 0px - 64px * 1),rgba(0,0,0,0.039) calc(100% - 0px - 64px * 0.88),rgba(0,0,0,0.14) calc(100% - 0px - 64px * 0.72),rgba(0,0,0,0.328) calc(100% - 0px - 64px * 0.5),rgba(0,0,0,0.53) calc(100% - 0px - 64px * 0.3),rgba(0,0,0,0.702) calc(100% - 0px - 64px * 0.12),rgba(0,0,0,0.78) calc(100% - 0px - 64px * 0),rgba(0,0,0,0.78) 100%),#706E6E}
+  .ap-p-haut-methode .ap-fond::after{display:block}
+}
+
+/* ------------------------------------------------------------------ Retour 21 de Tom (24/11) : au téléphone, « Analyse gratuite, sous
+   48 h ouvrées » etc. « plus bas et mis différemment pour que ça prenne moins de place », et une disposition plus lisible partout */
+@media (max-width:700px){
+  /* l'accueil : les trois mentions deviennent une ligne compacte en blanc, posée en bas de l'image (au-dessus du bouton du casque) */
+  [data-apple="site"] .ha.ap-photo{display:flex;flex-direction:column}
+  [data-apple="site"] .ha.ap-photo .ha-c{flex:1;padding-bottom:76px!important}
+  [data-apple="site"] .ap-photo .notes{margin-top:auto!important;padding-top:22px;flex-direction:row!important;flex-wrap:wrap;
+    justify-content:center;gap:4px 14px!important}
+  [data-apple="site"] .ap-photo .notes span{background:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+    padding:0!important;color:#fff;font-size:12.5px;font-weight:500;text-shadow:0 1px 8px rgba(0,0,0,.5)}
+  [data-apple="site"] .ap-photo .notes .ico{width:13px;height:13px}
+  /* les autres hauts : les mentions de la même façon, en ligne compacte (le texte foncé sur le gris), au lieu d'une colonne de pastilles */
+  [data-apple="site"] .haut:not(.ap-photo) .notes{flex-direction:row!important;flex-wrap:wrap;justify-content:center;gap:4px 14px!important;margin-top:20px}
+  [data-apple="site"] .haut:not(.ap-photo) .notes span{background:none!important;padding:0!important;font-size:12.5px;color:#3A3A3E}
+  [data-apple="site"] .haut:not(.ap-photo) .notes .ico{width:13px;height:13px}
+  /* les étapes de Méthode : des pastilles plus fines, plus serrées */
+  [data-apple="site"] .haut .parcours{gap:6px!important;margin-top:18px!important}
+  [data-apple="site"] .haut .parcours a{min-height:0!important;padding:8px 10px!important;font-size:13px!important}
+  /* un peu d'air entre le texte et les boutons, et entre les deux boutons */
+  [data-apple="site"] .ap-photo .boutons{gap:10px!important}
+}
