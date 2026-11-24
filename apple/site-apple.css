@@ -152,3 +152,36 @@ html[data-apple="site"]{overflow-x:clip}
   /* un peu d'air entre le texte et les boutons, et entre les deux boutons */
   [data-apple="site"] .ap-photo .boutons{gap:10px!important}
 }
+
+/* ------------------------------------------------------------------ l'accueil : la vidéo de présentation à la place des quatre cartes
+   (retour 23 de Tom, l'essai E « avec les icônes, bien espacé ») : le titre, les gains dans le sous-titre, la vidéo en grand, puis les
+   quatre gains en une ligne, chacun avec son icône, son résumé et son lien. Actif dès que sources-apple/video/presentation.mp4 existe. */
+#objectif.ap-avec-video .ap-video{max-width:1120px;margin:44px auto 0;border-radius:28px;overflow:hidden;background:#0B0B0C;
+  box-shadow:0 2px 4px rgba(0,0,0,.04),0 24px 60px rgba(0,0,0,.12)}
+#objectif.ap-avec-video .ap-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#0B0B0C}
+#objectif.ap-avec-video .ap-gains-ligne{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px;max-width:1120px;margin:52px auto 0;padding:0 8px}
+#objectif.ap-avec-video .ap-gain{display:flex;flex-direction:column;gap:8px;color:var(--encre);text-decoration:none}
+#objectif.ap-avec-video .ap-gain-ico{display:flex;color:var(--encre);margin-bottom:6px}
+#objectif.ap-avec-video .ap-gain-ico .ico{width:30px;height:30px}
+#objectif.ap-avec-video .ap-gain h3{font-size:20px;letter-spacing:-.025em;line-height:1.2;margin:0}
+#objectif.ap-avec-video .ap-gain p{margin:0;font-size:15px;line-height:1.5;color:var(--texte2)}
+#objectif.ap-avec-video .ap-gain .lien{margin-top:6px;font-size:14px;font-weight:600}
+#objectif.ap-avec-video .ap-gain:hover .lien{opacity:.65}
+#objectif.ap-avec-video .ob-sr{margin-top:48px}
+/* la légende de la source des chiffres de la vidéo (décision de Tom du 24/11) : discrète, juste sous la vidéo */
+#objectif.ap-avec-video .ap-video-source{max-width:1120px;margin:14px auto 0;font-size:12.5px;line-height:1.45;color:var(--texte2);text-align:center}
+#objectif.ap-avec-video .ap-video-source + .ap-gains-ligne{margin-top:44px}
+@media (max-width:640px){#objectif.ap-avec-video .ap-video-source{margin-top:10px;font-size:12px}#objectif.ap-avec-video .ap-video-source + .ap-gains-ligne{margin-top:28px}}
+/* retour 25 : le bouton noir sous « Sans risque », l'appel à l'action après la vidéo */
+#objectif.ap-avec-video .ap-cta-video{display:flex;justify-content:center;margin:24px 0 0}
+@media (max-width:640px){#objectif.ap-avec-video .ap-cta-video{margin-top:20px}#objectif.ap-avec-video .ap-cta-video .btn{width:100%;justify-content:center}}
+@media (max-width:900px){
+  #objectif.ap-avec-video .ap-gains-ligne{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px;margin-top:40px}
+}
+@media (max-width:640px){
+  #objectif.ap-avec-video .ap-video{margin-top:28px;border-radius:18px}
+  #objectif.ap-avec-video .ap-gains-ligne{gap:28px 18px;margin-top:32px;padding:0}
+  #objectif.ap-avec-video .ap-gain h3{font-size:18px}
+  #objectif.ap-avec-video .ap-gain p{font-size:14px}
+  #objectif.ap-avec-video .ap-gain-ico .ico{width:26px;height:26px}
+}
